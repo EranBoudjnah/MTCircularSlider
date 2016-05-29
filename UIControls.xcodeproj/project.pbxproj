@@ -14,6 +14,8 @@
 		A03895131CF8A9BC0049AACA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A03895111CF8A9BC0049AACA /* LaunchScreen.storyboard */; };
 		A038951E1CF8A9BC0049AACA /* UIControlsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A038951D1CF8A9BC0049AACA /* UIControlsTests.swift */; };
 		A03895291CF8A9BC0049AACA /* UIControlsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03895281CF8A9BC0049AACA /* UIControlsUITests.swift */; };
+		A03895371CF8AA520049AACA /* KnobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03895361CF8AA520049AACA /* KnobView.swift */; };
+		A038953D1CFB17CB0049AACA /* asset.png in Resources */ = {isa = PBXBuildFile; fileRef = A038953C1CFB17CB0049AACA /* asset.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		A03895241CF8A9BC0049AACA /* UIControlsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIControlsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A03895281CF8A9BC0049AACA /* UIControlsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIControlsUITests.swift; sourceTree = "<group>"; };
 		A038952A1CF8A9BC0049AACA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A03895361CF8AA520049AACA /* KnobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnobView.swift; sourceTree = "<group>"; };
+		A038953C1CFB17CB0049AACA /* asset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asset.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +105,10 @@
 				A038950A1CF8A9BC0049AACA /* ViewController.swift */,
 				A038950C1CF8A9BC0049AACA /* Main.storyboard */,
 				A038950F1CF8A9BC0049AACA /* Assets.xcassets */,
+				A038953C1CFB17CB0049AACA /* asset.png */,
 				A03895111CF8A9BC0049AACA /* LaunchScreen.storyboard */,
 				A03895141CF8A9BC0049AACA /* Info.plist */,
+				A03895361CF8AA520049AACA /* KnobView.swift */,
 			);
 			path = UIControls;
 			sourceTree = "<group>";
@@ -229,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A038953D1CFB17CB0049AACA /* asset.png in Resources */,
 				A03895131CF8A9BC0049AACA /* LaunchScreen.storyboard in Resources */,
 				A03895101CF8A9BC0049AACA /* Assets.xcassets in Resources */,
 				A038950E1CF8A9BC0049AACA /* Main.storyboard in Resources */,
@@ -257,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A038950B1CF8A9BC0049AACA /* ViewController.swift in Sources */,
+				A03895371CF8AA520049AACA /* KnobView.swift in Sources */,
 				A03895091CF8A9BC0049AACA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +492,7 @@
 				A038952F1CF8A9BC0049AACA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A03895301CF8A9BC0049AACA /* Build configuration list for PBXNativeTarget "UIControlsTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +501,7 @@
 				A03895321CF8A9BC0049AACA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A03895331CF8A9BC0049AACA /* Build configuration list for PBXNativeTarget "UIControlsUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +510,7 @@
 				A03895351CF8A9BC0049AACA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
