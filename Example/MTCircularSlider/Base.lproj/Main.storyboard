@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="EZQ-fX-USx">
             <objects>
-                <viewController id="NNH-PZ-T02" sceneMemberID="viewController">
+                <viewController id="NNH-PZ-T02" customClass="ViewController" customModule="MTCircularSlider_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dC4-y9-tnk"/>
                         <viewControllerLayoutGuide type="bottom" id="qfS-tz-ixy"/>
@@ -78,6 +78,9 @@
                                         <real key="value" value="50"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onSlideChange:" destination="NNH-PZ-T02" eventType="valueChanged" id="hJO-To-zLJ"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y2A-sL-BVr" customClass="MTCircularSlider" customModule="MTCircularSlider">
                                 <rect key="frame" x="20" y="142" width="236" height="236"/>
@@ -135,6 +138,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="knobView1" destination="Rse-9x-3ti" id="ZjN-ok-BJ7"/>
+                        <outlet property="knobView2" destination="9nI-1g-fCM" id="YKH-9g-ysV"/>
+                        <outlet property="knobWithLabelView" destination="p9F-Pm-sV6" id="x4M-p5-TIp"/>
+                        <outlet property="progressView" destination="y2A-sL-BVr" id="mEi-IP-xpf"/>
+                        <outlet property="valueLabel" destination="MEY-R0-jQn" id="ikq-qJ-DLU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pf6-Dl-pFE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
