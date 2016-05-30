@@ -17,26 +17,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V1j-EZ-MOF">
-                                <rect key="frame" x="44" y="137" width="118" height="31"/>
-                            </slider>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daq-mB-7tj" customClass="KnobView" customModule="UIControls" customModuleProvider="target">
-                                <rect key="frame" x="168" y="175" width="114" height="114"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daq-mB-7tj" customClass="MTCircularSlider" customModule="UIControls" customModuleProvider="target">
+                                <rect key="frame" x="142" y="20" width="114" height="114"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ync-pu-Z8C">
+                                        <rect key="frame" x="6" y="42" width="106" height="26"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="laneWidth">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
                                         <real key="value" value="14"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="laneMaxAngle">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackMaxAngle">
                                         <real key="value" value="235"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="laneMinAngle">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackMinAngle">
                                         <real key="value" value="45"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="laneShadowBlur">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackShadowRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="laneShadowDepth">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackShadowDepth">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="minTrackTint">
@@ -51,32 +56,95 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="maxTrackTint">
                                         <color key="value" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="thumbShadowBlur">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="thumbShadowRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="thumbShadowDepth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasThumb" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="valueMinimum">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="valueMaximum">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onSlideChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="RLm-40-7jY"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUm-QU-cCN" customClass="MTCircularSlider" customModule="UIControls" customModuleProvider="target">
+                                <rect key="frame" x="20" y="20" width="114" height="114"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.0" green="0.47975623607635498" blue="0.99819189310073853" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u2o-yu-zmW" customClass="MTCircularSlider" customModule="UIControls" customModuleProvider="target">
+                                <rect key="frame" x="20" y="393" width="114" height="114"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.0" green="0.47975623610000001" blue="0.99819189310000001" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uwW-zi-9yS" customClass="MTCircularSlider" customModule="UIControls" customModuleProvider="target">
+                                <rect key="frame" x="142" y="393" width="114" height="114"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.0" green="0.47975623610000001" blue="0.99819189310000001" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7h-RD-evb" customClass="MTCircularSlider" customModule="UIControls" customModuleProvider="target">
+                                <rect key="frame" x="20" y="142" width="236" height="236"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackMaxAngle">
+                                        <integer key="value" value="225"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackMinAngle">
+                                        <integer key="value" value="-45"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="minTrackTint">
+                                        <color key="value" red="0.0" green="1" blue="0.0" alpha="0.59832974137931039" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="thumbRadius">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="thumbTint">
+                                        <color key="value" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="maxTrackTint">
+                                        <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="thumbShadowRadius">
                                         <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="thumbShadowDepth">
                                         <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hasThumb" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackShadowRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackShadowDepth">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="0.25"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onSlideChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="RLm-40-7jY"/>
-                                </connections>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUm-QU-cCN" customClass="KnobView" customModule="UIControls" customModuleProvider="target">
-                                <rect key="frame" x="46" y="175" width="114" height="114"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.0" green="0.47975623607635498" blue="0.99819189310073853" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="hhb-QI-gVa">
-                                <rect key="frame" x="166" y="137" width="118" height="31"/>
-                                <color key="minimumTrackTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="maximumTrackTintColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="thumbTintColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="knobView1" destination="u2o-yu-zmW" id="XkR-yJ-2Jg"/>
+                        <outlet property="knobView2" destination="uwW-zi-9yS" id="nnh-4J-JAe"/>
+                        <outlet property="knobWithLabelView" destination="daq-mB-7tj" id="DRg-kd-HNO"/>
+                        <outlet property="progressView" destination="h7h-RD-evb" id="RBU-oI-tqo"/>
+                        <outlet property="valueLabel" destination="Ync-pu-Z8C" id="W4n-R7-3HT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
