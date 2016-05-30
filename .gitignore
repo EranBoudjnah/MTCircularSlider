@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 # OS X
 .DS_Store
 
 # Xcode
+=======
+# Xcode
+.DS_Store
+>>>>>>> 1c4acaba914c1bcb2c9abf6ae49ca07b1dea1f02
 build/
 *.pbxuser
 !default.pbxuser
@@ -11,6 +16,7 @@ build/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+<<<<<<< HEAD
 xcuserdata/
 *.xccheckout
 profile
@@ -31,3 +37,13 @@ Carthage
 # `pod install` in .travis.yml
 #
 # Pods/
+=======
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+Pods
+>>>>>>> 1c4acaba914c1bcb2c9abf6ae49ca07b1dea1f02
