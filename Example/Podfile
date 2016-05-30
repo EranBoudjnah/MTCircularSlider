@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MTCircularSlider_Example' do
+  pod 'MTCircularSlider', :path => '../'
+
+  target 'MTCircularSlider_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
