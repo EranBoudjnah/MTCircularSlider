@@ -1,0 +1,6 @@
+framework module MTCircularSlider {
+  umbrella header "MTCircularSlider-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'MTCircularSlider'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of MTCircularSlider.'
+  s.summary          = 'A circular slider control.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,15 +18,16 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+A feature-rich circular slider control. You can tweak colors, shadows and angles.
+This widget tries to conform to UISlider both in naming and default style.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/MTCircularSlider'
+  s.homepage         = 'https://github.com/EranBoudjnah/MTCircularSlider'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Eran Boudjnah' => 'eranbou@gmail.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/MTCircularSlider.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/EranBoudjnah/MTCircularSlider.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://www.linkedin.com/in/eranboudjnah'
 
   s.ios.deployment_target = '8.0'
 
