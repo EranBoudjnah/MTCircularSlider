@@ -6,6 +6,6 @@ target 'MTCircularSlider_Example' do
   target 'MTCircularSlider_Tests' do
     inherit! :search_paths
 
-    
+		pod 'MTCircularSlider', :path => '../'
   end
 end

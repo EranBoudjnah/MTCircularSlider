@@ -1,5 +1,5 @@
 PODS:
-  - MTCircularSlider (0.2.0)
+  - MTCircularSlider (0.2.1)
 
 DEPENDENCIES:
   - MTCircularSlider (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  MTCircularSlider: c88beef5bc337688d325c5ff16a99ef26d9a2776
+  MTCircularSlider: 5da4977732ee70967389d72dadc973746ec1854e
 
-PODFILE CHECKSUM: 50ef71e01ec705348c1ca870207bd12a4ceb9f95
+PODFILE CHECKSUM: a7c324976dbf131b3d1d714949b6f2a7dd1a86e3
 
 COCOAPODS: 1.0.0
