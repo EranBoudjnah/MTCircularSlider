@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,22 +18,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cXb-Fq-sZS" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="20" y="20" width="114" height="114"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.0" green="0.47975623610000001" blue="0.99819189310000001" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p9F-Pm-sV6" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="142" y="20" width="114" height="114"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9F-Pm-sV6" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="304" y="64" width="112" height="112"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEY-R0-jQn">
-                                        <rect key="frame" x="6" y="42" width="106" height="26"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEY-R0-jQn">
+                                        <rect key="frame" x="6" y="42" width="106" height="24"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="p9F-Pm-sV6" secondAttribute="height" multiplier="1:1" id="4cp-hN-xI9"/>
+                                    <constraint firstAttribute="bottom" secondItem="MEY-R0-jQn" secondAttribute="bottom" constant="46" id="RAK-fi-uaC"/>
+                                    <constraint firstItem="MEY-R0-jQn" firstAttribute="leading" secondItem="p9F-Pm-sV6" secondAttribute="leading" constant="6" id="vTT-5k-Tat"/>
+                                    <constraint firstItem="MEY-R0-jQn" firstAttribute="top" secondItem="p9F-Pm-sV6" secondAttribute="top" constant="42" id="wHN-k9-T5m"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
                                         <real key="value" value="14"/>
@@ -82,9 +84,12 @@
                                     <action selector="onSlideChange:" destination="NNH-PZ-T02" eventType="valueChanged" id="hJO-To-zLJ"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y2A-sL-BVr" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="20" y="142" width="236" height="236"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2A-sL-BVr" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="184" y="184" width="232" height="232"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="y2A-sL-BVr" secondAttribute="height" multiplier="1:1" id="Fwh-ed-4rp"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
                                         <real key="value" value="14"/>
@@ -125,18 +130,54 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rse-9x-3ti" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="20" y="393" width="114" height="114"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nI-1g-fCM" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="304" y="424" width="112" height="112"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.0" green="0.47975623610000001" blue="0.99819189310000001" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9nI-1g-fCM" secondAttribute="height" multiplier="1:1" id="2Bz-rt-azB"/>
+                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9nI-1g-fCM" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="142" y="393" width="114" height="114"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rse-9x-3ti" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="184" y="424" width="112" height="112"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.0" green="0.47975623610000001" blue="0.99819189310000001" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Rse-9x-3ti" secondAttribute="height" multiplier="1:1" id="fdz-mW-421"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXb-Fq-sZS" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="184" y="64" width="112" height="112"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.0" green="0.47975623610000001" blue="0.99819189310000001" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="cXb-Fq-sZS" secondAttribute="height" multiplier="1:1" id="dBn-M7-jDl"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cXb-Fq-sZS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dC4-y9-tnk" secondAttribute="bottom" constant="25" id="1Qa-Aq-em2"/>
+                            <constraint firstItem="y2A-sL-BVr" firstAttribute="centerX" secondItem="zm9-jI-IDH" secondAttribute="centerX" id="3yf-TO-zcL"/>
+                            <constraint firstItem="y2A-sL-BVr" firstAttribute="top" secondItem="p9F-Pm-sV6" secondAttribute="bottom" constant="8" id="4DG-bZ-J4Z"/>
+                            <constraint firstItem="p9F-Pm-sV6" firstAttribute="leading" secondItem="cXb-Fq-sZS" secondAttribute="trailing" constant="8" id="5nd-N8-mQt"/>
+                            <constraint firstItem="y2A-sL-BVr" firstAttribute="top" secondItem="cXb-Fq-sZS" secondAttribute="bottom" constant="8" id="D1J-YP-pxg"/>
+                            <constraint firstItem="cXb-Fq-sZS" firstAttribute="leading" secondItem="y2A-sL-BVr" secondAttribute="leading" id="EkJ-R2-aS6"/>
+                            <constraint firstItem="y2A-sL-BVr" firstAttribute="centerY" secondItem="zm9-jI-IDH" secondAttribute="centerY" id="FKW-QD-NDS"/>
+                            <constraint firstItem="p9F-Pm-sV6" firstAttribute="trailing" secondItem="y2A-sL-BVr" secondAttribute="trailing" id="GEE-hD-BuC"/>
+                            <constraint firstItem="qfS-tz-ixy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Rse-9x-3ti" secondAttribute="bottom" constant="25" id="I1c-Gy-Qb4"/>
+                            <constraint firstItem="9nI-1g-fCM" firstAttribute="top" secondItem="y2A-sL-BVr" secondAttribute="bottom" constant="8" id="NGi-CG-EwA"/>
+                            <constraint firstItem="Rse-9x-3ti" firstAttribute="top" secondItem="y2A-sL-BVr" secondAttribute="bottom" constant="8" id="VRR-jd-vcA"/>
+                            <constraint firstItem="MEY-R0-jQn" firstAttribute="trailing" secondItem="y2A-sL-BVr" secondAttribute="trailing" id="YU4-XJ-t8B"/>
+                            <constraint firstItem="Rse-9x-3ti" firstAttribute="bottom" secondItem="9nI-1g-fCM" secondAttribute="bottom" id="bFe-aZ-ScV"/>
+                            <constraint firstItem="9nI-1g-fCM" firstAttribute="leading" secondItem="Rse-9x-3ti" secondAttribute="trailing" constant="8" id="cZw-KJ-SHd"/>
+                            <constraint firstItem="p9F-Pm-sV6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dC4-y9-tnk" secondAttribute="bottom" constant="25" id="eWA-xf-anB"/>
+                            <constraint firstItem="9nI-1g-fCM" firstAttribute="trailing" secondItem="y2A-sL-BVr" secondAttribute="trailing" id="ehd-5A-UOo"/>
+                            <constraint firstItem="cXb-Fq-sZS" firstAttribute="top" secondItem="p9F-Pm-sV6" secondAttribute="top" id="ldX-qT-P3a"/>
+                            <constraint firstItem="cXb-Fq-sZS" firstAttribute="top" secondItem="dC4-y9-tnk" secondAttribute="bottom" priority="250" constant="40" id="mYK-xw-oGD"/>
+                            <constraint firstItem="Rse-9x-3ti" firstAttribute="leading" secondItem="y2A-sL-BVr" secondAttribute="leading" id="nkW-PB-vyp"/>
+                            <constraint firstItem="qfS-tz-ixy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9nI-1g-fCM" secondAttribute="bottom" constant="25" id="qSb-hb-Rxg"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="knobView1" destination="Rse-9x-3ti" id="ZjN-ok-BJ7"/>
