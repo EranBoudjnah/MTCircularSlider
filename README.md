@@ -5,7 +5,11 @@
 [![License](https://img.shields.io/cocoapods/l/MTCircularSlider.svg?style=flat)](http://cocoapods.org/pods/MTCircularSlider)
 [![Platform](https://img.shields.io/cocoapods/p/MTCircularSlider.svg?style=flat)](http://cocoapods.org/pods/MTCircularSlider)
 
-## Example
+## Screenshot
+
+![Alt text](/../screenshots/screenshots/Simulator\ Screen\ Shot\ 31\ May\ 2016\,\ 09.25.53.png?raw=true "Screenshot from Simulator")
+
+## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
