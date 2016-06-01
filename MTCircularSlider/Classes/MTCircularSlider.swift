@@ -141,6 +141,10 @@ public class MTCircularSlider: UIControl {
 		return CGFloat(radians)
 	}
 
+	private var lastPositionForTouch = CGPointZero
+
+	private var pseudoValueForTouch = Float(0.0)
+	
 	override
 	public var center: CGPoint {
 		didSet { setNeedsDisplay() }
@@ -299,8 +303,10 @@ public class MTCircularSlider: UIControl {
 	                                   withEvent event: UIEvent?) -> Bool {
 		if hasThumb {
 			let location = touch.locationInView(self)
-			
-			setValueByPosition(location)
+
+			calculatePseudoValue(at: location)
+			value = calculatePseudoValue(at: location)
+			lastPositionForTouch = location
 		}
 		
 		return super.beginTrackingWithTouch(touch, withEvent: event)
@@ -314,9 +320,12 @@ public class MTCircularSlider: UIControl {
 		}
 		
 		let location = touch.locationInView(self)
-		
-		setValueByPosition(location)
-		
+
+		value = calculatePseudoValue(from: lastPositionForTouch, to: location)
+		// setValueByPosition(location)
+
+		lastPositionForTouch = location
+
 		return true
 	}
 
@@ -377,38 +386,69 @@ public class MTCircularSlider: UIControl {
 		                    endAngle: CGFloat(M_PI * 2.0),
 		                    clockwise: true)
 	}
-	
-	private func setValueByPosition(location: CGPoint) {
-		let centerX = bounds.width / 2.0
-		let centerY = bounds.height / 2.0
-		// Calculate the relative angle of the user's touch point starting from
-		// trackMinAngle.
-		var angle = (Double(atan2(location.x - centerX, location.y - centerY)) /
-			M_PI * 180.0 + trackMinAngle) + 180
-		angle = (90 - angle) % 360
-		while (angle < 0) { angle += 360 }
+
+	private func pan(gesture: UIGestureRecognizer) {
 		
+	}
+
+	private func calculatePseudoValue(at point: CGPoint) -> Float {
+		let angle = angleAt(point)
+
 		// Normalize the angle, then convert to value scale.
 		let targetValue =
 			Float(angle / (trackMaxAngle - trackMinAngle)) *
 				(valueMaximum - valueMinimum) + valueMinimum
-		
-		// If in value bounds, set our value to the new value.
-		if targetValue == cappedValue(targetValue) {
-			value = targetValue
-			
-		} else { // If out of value bounds, set to the closest bound.
-			var dist1 = abs(angle)
-			var dist2 = abs(angle - (trackMaxAngle - trackMinAngle))
-			// Get the distance from 360 degrees if greater than 180 degrees.
-			if dist1 > 180 { dist1 = 360 - dist1 }
-			if dist2 > 180 { dist2 = 360 - dist2 }
 
-			if dist1 <= dist2 {
-				value = valueMinimum
-			} else {
-				value = valueMaximum
-			}
+		pseudoValueForTouch = targetValue
+
+		return targetValue
+	}
+
+	private func calculatePseudoValue(from from: CGPoint, to: CGPoint) -> Float {
+		let angle1 = angleAt(from)
+		let angle2 = angleAt(to)
+		var angle = angle2 - angle1
+		var valueRange = valueMaximum - valueMinimum
+		let angleToValue =
+			Double(valueRange) / (trackMaxAngle - trackMinAngle)
+		let clockwise = isClockwise(
+			vector1: CGPoint(x: from.x - bounds.midX, y: from.y - bounds.midY),
+			vector2: CGPoint(x: to.x - from.x, y: to.y - from.y)
+		)
+
+		if (clockwise) {
+			while (angle < 0) { angle += 360 }
+
+		} else {
+			while (angle > 0) { angle -= 360 }
 		}
+
+		// Update our value by as much as the last motion defined.
+		pseudoValueForTouch += Float(angle * angleToValue)
+
+		// And make sure we don't count more than one whole circle of overflow.
+		if (pseudoValueForTouch > valueMinimum + valueRange * 2) {
+			pseudoValueForTouch -= valueRange
+		}
+		if (pseudoValueForTouch < valueMinimum - valueRange) {
+			pseudoValueForTouch += valueRange
+		}
+
+		return pseudoValueForTouch
+	}
+
+	private func isClockwise(vector1 vector1: CGPoint, vector2: CGPoint) -> Bool {
+		return vector1.y * vector2.x < vector1.x * vector2.y
+	}
+	
+	private func angleAt(point: CGPoint) -> Double {
+		// Calculate the relative angle of the user's touch point starting from
+		// trackMinAngle.
+		var angle = (Double(atan2(point.x - bounds.midX, point.y - bounds.midY)) /
+			M_PI * 180.0 + trackMinAngle) + 180
+		angle = (90 - angle) % 360
+		while (angle < 0) { angle += 360 }
+
+		return angle
 	}
 }
