@@ -408,7 +408,7 @@ public class MTCircularSlider: UIControl {
 		let angle1 = angleAt(from)
 		let angle2 = angleAt(to)
 		var angle = angle2 - angle1
-		var valueRange = valueMaximum - valueMinimum
+		let valueRange = valueMaximum - valueMinimum
 		let angleToValue =
 			Double(valueRange) / (trackMaxAngle - trackMinAngle)
 		let clockwise = isClockwise(
