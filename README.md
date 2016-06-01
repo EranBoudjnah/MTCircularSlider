@@ -84,52 +84,52 @@ self.sliderArea.addSubview(self.slider)
 
 ## Attributes
 
-### ``minTrackTint(UIColor)``
+###### ``minTrackTint(UIColor)``
 
 Sets the color of the track up to the thumb.
 
-### ``maxTrackTint(UIColor)``
+###### ``maxTrackTint(UIColor)``
 
 Sets the color of the track from the thumb to the end of the track.
 
-### ``trackWidth(CGFloat)``
+###### ``trackWidth(CGFloat)``
 
 Sets the width of the track in points.
 
-### ``trackShadowRadius(CGFloat)``
+###### ``trackShadowRadius(CGFloat)``
 
 Sets the radius for the inner shadow on the track.
 
-### ``trackShadowDepth(CGFloat)``
+###### ``trackShadowDepth(CGFloat)``
 
 Sets the distance of the inner shadow on the track from the track edge.
 
-### ``trackMinAngle(Double)``
+###### ``trackMinAngle(Double)``
 
 Sets the minimum angle of the track in degrees.
 
-### ``trackMaxAngle(Double)``
+###### ``trackMaxAngle(Double)``
 
 Sets the maximum angle of the track in degrees.
 
-### ``hasThumb(Bool)``
+###### ``hasThumb(Bool)``
 
 Toggles the control between progress and slider modes. Setting hasThumb to true
 set the control to slider mode.
 
-### ``thumbTint(UIColor)``
+###### ``thumbTint(UIColor)``
 
 Sets the color of the thumb.
 
-### ``thumbRadius(CGFloat)``
+###### ``thumbRadius(CGFloat)``
 
 Sets the radius of the thumb in points.
 
-### ``thumbShadowRadius(CGFloat)``
+###### ``thumbShadowRadius(CGFloat)``
 
 Sets the radius of the shadow the thumb drops.
 
-### ``thumbShadowDepth(CGFloat)``
+###### ``thumbShadowDepth(CGFloat)``
 
 Sets the distance of the shadow the thumb from the thumb.
 
