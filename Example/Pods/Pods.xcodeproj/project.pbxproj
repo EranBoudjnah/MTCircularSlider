@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		3897F28E64331FC5E20B87DDE59B9160 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		6F7035E16E49F37AD93922C3560BAE8B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		A0E04A581CFF3E650092ACB3 /* MTCircularSlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0FF8AEBA4E564C7463C2E07BC7701F /* MTCircularSlider.framework */; };
-		A0E04A5E1CFF3E960092ACB3 /* MTCircularSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07E24E3B61BFCFA4B92C10CBD892E59 /* MTCircularSliderTests.swift */; };
 		B10B2EE86924C8D2914E960D01926B61 /* MTCircularSlider-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D4903FB6959441D7347FEC15FF59B313 /* MTCircularSlider-dummy.m */; };
 		BBBD6FD494E8B95B0695FAE1187F288A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		C20953A3B55E634262B0676753E8CC4D /* Pods-MTCircularSlider_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A023344DEC60D3F70BBB8C08FECDE6 /* Pods-MTCircularSlider_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -22,13 +20,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A0E04A591CFF3E650092ACB3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7715746702177A6B533ADAD3A5C6203B;
-			remoteInfo = MTCircularSlider;
-		};
 		AC7F8003B91531A801C00894479E6D20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -70,8 +61,6 @@
 		58B8057E3716BDD52D26394C6217614E /* MTCircularSlider.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MTCircularSlider.xcconfig; sourceTree = "<group>"; };
 		6B0AD47944CD4A4EEB03EE586DB4F1C1 /* MTCircularSlider-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MTCircularSlider-prefix.pch"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A0E04A531CFF3E650092ACB3 /* MTCircularSliderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTCircularSliderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0E04A571CFF3E650092ACB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9CA43E482DF256B229BEC37D8B4A29C /* MTCircularSlider-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MTCircularSlider-umbrella.h"; sourceTree = "<group>"; };
 		B9D4A73DE22FCE69D952A67F8634DFF6 /* Pods-MTCircularSlider_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MTCircularSlider_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C610A7F99669C273CD8EAA4CD6F9E5DF /* MTCircularSlider.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MTCircularSlider.modulemap; sourceTree = "<group>"; };
@@ -79,7 +68,6 @@
 		D4903FB6959441D7347FEC15FF59B313 /* MTCircularSlider-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MTCircularSlider-dummy.m"; sourceTree = "<group>"; };
 		D763693AA24EF235722E5C6F4DDC380A /* MTCircularSlider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MTCircularSlider.swift; sourceTree = "<group>"; };
 		D7641F1C887C8D3F02709D8688DCAA58 /* Pods-MTCircularSlider_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MTCircularSlider_Example-resources.sh"; sourceTree = "<group>"; };
-		F07E24E3B61BFCFA4B92C10CBD892E59 /* MTCircularSliderTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MTCircularSliderTests.swift; path = ../../../MTCircularSlider/Classes/MTCircularSliderTests.swift; sourceTree = "<group>"; };
 		F5930E5FC908252A4C6D830B9E8D4F4D /* Pods-MTCircularSlider_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MTCircularSlider_Example-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,14 +85,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F7035E16E49F37AD93922C3560BAE8B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0E04A501CFF3E650092ACB3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0E04A581CFF3E650092ACB3 /* MTCircularSlider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,20 +195,10 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				1BC73AE7F9514F4EE20638BC2DDFED0B /* Development Pods */,
-				A0E04A541CFF3E650092ACB3 /* MTCircularSliderTests */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
 				D0EB09AFF1E84285B67C6EC8EEC34C45 /* Products */,
 				7865746DFA5C8D48B759070C882E7B34 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		A0E04A541CFF3E650092ACB3 /* MTCircularSliderTests */ = {
-			isa = PBXGroup;
-			children = (
-				F07E24E3B61BFCFA4B92C10CBD892E59 /* MTCircularSliderTests.swift */,
-				A0E04A571CFF3E650092ACB3 /* Info.plist */,
-			);
-			path = MTCircularSliderTests;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -255,7 +225,6 @@
 				0F0FF8AEBA4E564C7463C2E07BC7701F /* MTCircularSlider.framework */,
 				45B195DF651000D9D0814FF66F79D475 /* Pods_MTCircularSlider_Example.framework */,
 				3E16BA3EB51541BE9F2AE61D5BEC7B09 /* Pods_MTCircularSlider_Tests.framework */,
-				A0E04A531CFF3E650092ACB3 /* MTCircularSliderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -325,24 +294,6 @@
 			productReference = 0F0FF8AEBA4E564C7463C2E07BC7701F /* MTCircularSlider.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		A0E04A521CFF3E650092ACB3 /* MTCircularSliderTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A0E04A5D1CFF3E650092ACB3 /* Build configuration list for PBXNativeTarget "MTCircularSliderTests" */;
-			buildPhases = (
-				A0E04A4F1CFF3E650092ACB3 /* Sources */,
-				A0E04A501CFF3E650092ACB3 /* Frameworks */,
-				A0E04A511CFF3E650092ACB3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A0E04A5A1CFF3E650092ACB3 /* PBXTargetDependency */,
-			);
-			name = MTCircularSliderTests;
-			productName = MTCircularSliderTests;
-			productReference = A0E04A531CFF3E650092ACB3 /* MTCircularSliderTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		F83291C3A5A7EE410B90D1D16B4B96EF /* Pods-MTCircularSlider_Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ACDED3ED42E23FE885F5B413F16FE291 /* Build configuration list for PBXNativeTarget "Pods-MTCircularSlider_Tests" */;
@@ -368,12 +319,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
-				TargetAttributes = {
-					A0E04A521CFF3E650092ACB3 = {
-						CreatedOnToolsVersion = 7.3.1;
-					};
-				};
+				LastUpgradeCheck = 0730;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -390,20 +336,9 @@
 				7715746702177A6B533ADAD3A5C6203B /* MTCircularSlider */,
 				1AF5D1C37D9040973FE2F558FF87E11C /* Pods-MTCircularSlider_Example */,
 				F83291C3A5A7EE410B90D1D16B4B96EF /* Pods-MTCircularSlider_Tests */,
-				A0E04A521CFF3E650092ACB3 /* MTCircularSliderTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		A0E04A511CFF3E650092ACB3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2AB9336C42A81141A0F0F6164180F8CD /* Sources */ = {
@@ -423,14 +358,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A0E04A4F1CFF3E650092ACB3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0E04A5E1CFF3E960092ACB3 /* MTCircularSliderTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D6898CEF93BFC97E3C730D695C96E12E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -447,11 +374,6 @@
 			name = MTCircularSlider;
 			target = 7715746702177A6B533ADAD3A5C6203B /* MTCircularSlider */;
 			targetProxy = E8CE9BD0F6DB247A359A2A7FE8216DF4 /* PBXContainerItemProxy */;
-		};
-		A0E04A5A1CFF3E650092ACB3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7715746702177A6B533ADAD3A5C6203B /* MTCircularSlider */;
-			targetProxy = A0E04A591CFF3E650092ACB3 /* PBXContainerItemProxy */;
 		};
 		D4F5488C4F9C07106DB01CC7670D2415 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -482,6 +404,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MTCircularSlider/MTCircularSlider.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = MTCircularSlider;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -511,6 +434,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MTCircularSlider/MTCircularSlider.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = MTCircularSlider;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -595,54 +519,6 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
-		};
-		A0E04A5B1CFF3E650092ACB3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = MTCircularSliderTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mittleoupe.MTCircularSliderTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		A0E04A5C1CFF3E650092ACB3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = MTCircularSliderTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mittleoupe.MTCircularSliderTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-			};
-			name = Release;
 		};
 		AAF678CED40D3499169D10F63CA0719E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -803,14 +679,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		A0E04A5D1CFF3E650092ACB3 /* Build configuration list for PBXNativeTarget "MTCircularSliderTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0E04A5B1CFF3E650092ACB3 /* Debug */,
-				A0E04A5C1CFF3E650092ACB3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 		ACDED3ED42E23FE885F5B413F16FE291 /* Build configuration list for PBXNativeTarget "Pods-MTCircularSlider_Tests" */ = {
 			isa = XCConfigurationList;

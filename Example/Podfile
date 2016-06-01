@@ -1,11 +1,15 @@
 use_frameworks!
 
+def shared_pods
+	pod 'MTCircularSlider', :path => '../'
+end
+
 target 'MTCircularSlider_Example' do
-  pod 'MTCircularSlider', :path => '../'
+	shared_pods
 
   target 'MTCircularSlider_Tests' do
     inherit! :search_paths
 
-		pod 'MTCircularSlider', :path => '../'
+		shared_pods
   end
 end
