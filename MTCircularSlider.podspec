@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MTCircularSlider'
-  s.version          = '0.2.4'
+  s.version          = '0.2.5'
   s.summary          = 'A circular slider control.'
 
 # This description is used to generate tags and improve search results.
@@ -23,7 +23,7 @@ This widget tries to conform to UISlider both in naming and default style.
                        DESC
 
   s.homepage         = 'https://github.com/EranBoudjnah/MTCircularSlider'
-  s.screenshots     = 'raw.githubusercontent.com/EranBoudjnah/MTCircularSlider/screenshots/screenshots/Simulator%20Screen%20Shot%202%20Jun%202016%2C%2013.35.42.png'
+  s.screenshots     = 'http://raw.githubusercontent.com/EranBoudjnah/MTCircularSlider/screenshots/screenshots/Simulator%20Screen%20Shot%202%20Jun%202016%2C%2013.35.42.png'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Eran Boudjnah' => 'eranbou@gmail.com' }
   s.source           = { :git => 'https://github.com/EranBoudjnah/MTCircularSlider.git', :tag => s.version.to_s }
