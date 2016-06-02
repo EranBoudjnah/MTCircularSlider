@@ -7,7 +7,7 @@
 
 ## Screenshot
 
-<img src="/../screenshots/screenshots/Simulator%20Screen%20Shot%2031%20May%202016,%2009.25.53.png?raw=true" width="360" height="640" title="Screenshot from Simulator" alt="Screenshot from Simulator" />
+<img src="/../screenshots/screenshots/Simulator%20Screen%20Shot%202%20Jun%202016,%2013.35.42.png?raw=true" width="360" height="640" title="Screenshot from Simulator" alt="Screenshot from Simulator" />
 
 ## Usage
 
