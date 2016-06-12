@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MTCircularSlider'
-  s.version          = '0.2.7'
+  s.version          = '0.2.8'
   s.summary          = 'A circular slider control.'
 
 # This description is used to generate tags and improve search results.
