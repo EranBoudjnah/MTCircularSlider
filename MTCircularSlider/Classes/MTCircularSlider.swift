@@ -162,7 +162,7 @@ public class MTCircularSlider: UIControl {
 		
 		prepare()
 	}
-	
+
 	override
 	public func prepareForInterfaceBuilder() {
 		prepare()
@@ -174,6 +174,17 @@ public class MTCircularSlider: UIControl {
 	
 	override
 	public func drawRect(rect: CGRect) {
+		/**
+		Returns a UIBezierPath with the shape of a ring slice.
+
+		- parameter arcCenter:   The center of the ring
+		- parameter innerRadius: The inner radius of the ring
+		- parameter outerRadius: The outer radius of the ring
+		- parameter startAngle:  The start angle of the ring slice
+		- parameter endAngle:    The end angle of the ring slice
+
+		- returns: A UIBezierPath with the shape of a ring slice.
+		*/
 		func getArcPath(arcCenter: CGPoint, innerRadius: CGFloat,
 		                outerRadius: CGFloat, startAngle: CGFloat,
 		                endAngle: CGFloat) -> UIBezierPath {
@@ -192,7 +203,10 @@ public class MTCircularSlider: UIControl {
 			
 			return arcPath
 		}
-		
+
+		/**
+		Clips the drawing to the MTCircularSlider track.
+		*/
 		func clipPath() {
 			let minAngle = CGFloat(trackMinAngle / 180.0 * M_PI + M_PI)
 			let maxAngle = CGFloat(trackMaxAngle / 180.0 * M_PI + M_PI)
@@ -204,7 +218,10 @@ public class MTCircularSlider: UIControl {
 			
 			clipPath.addClip()
 		}
-		
+
+		/**
+		Fills the part of the track between the mininum angle and the thumb.
+		*/
 		func drawProgress() {
 			let minAngle = CGFloat(trackMinAngle / 180.0 * M_PI + M_PI)
 			
@@ -304,8 +321,13 @@ public class MTCircularSlider: UIControl {
 		if hasThumb {
 			let location = touch.locationInView(self)
 
-			calculatePseudoValue(at: location)
-			value = calculatePseudoValue(at: location)
+			let pseudoValue = calculatePseudoValue(at: location)
+			// Do not begin a gesture if the touch is out of our bounds.
+			if cappedValue(pseudoValue) != pseudoValue {
+				return false
+			}
+
+			value = pseudoValue
 			lastPositionForTouch = location
 		}
 		
