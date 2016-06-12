@@ -114,10 +114,17 @@ public class MTCircularSlider: UIControl {
 		return convertPoint(center, fromView: superview)
 	}
 	
+	private var thumbCenter: CGPoint {
+		var thumbCenter = viewCenter
+		thumbCenter.x += CGFloat(cos(thumbAngle)) * controlRadius
+		thumbCenter.y += CGFloat(sin(thumbAngle)) * controlRadius
+		return thumbCenter
+	}
+	
 	private var controlRadius: CGFloat {
 		return min(bounds.width, bounds.height) / 2.0 - controlThickness
 	}
-
+	
 	private var controlThickness: CGFloat {
 		let thumbRadius = (hasThumb) ? self.thumbRadius : 0
 		return max(thumbRadius, trackWidth / 2.0)
@@ -130,19 +137,19 @@ public class MTCircularSlider: UIControl {
 	private var outerControlRadius: CGFloat {
 		return controlRadius + trackWidth * 0.5
 	}
-
+	
 	private var thumbAngle: CGFloat {
 		let normalizedValue = (value - valueMinimum) / (valueMaximum - valueMinimum)
 		let degrees = Double(normalizedValue) * (trackMaxAngle - trackMinAngle) +
-			trackMinAngle
+		trackMinAngle
 		// Convert to radians and rotate 180 degrees so that 0 degrees would be on
 		// the left.
 		let radians = degrees / 180.0 * M_PI + M_PI
 		return CGFloat(radians)
 	}
-
+	
 	private var lastPositionForTouch = CGPointZero
-
+	
 	private var pseudoValueForTouch = Float(0.0)
 	
 	override
@@ -155,14 +162,14 @@ public class MTCircularSlider: UIControl {
 		
 		prepare()
 	}
-
+	
 	required
 	public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
 		prepare()
 	}
-
+	
 	override
 	public func prepareForInterfaceBuilder() {
 		prepare()
@@ -176,13 +183,13 @@ public class MTCircularSlider: UIControl {
 	public func drawRect(rect: CGRect) {
 		/**
 		Returns a UIBezierPath with the shape of a ring slice.
-
+		
 		- parameter arcCenter:   The center of the ring
 		- parameter innerRadius: The inner radius of the ring
 		- parameter outerRadius: The outer radius of the ring
 		- parameter startAngle:  The start angle of the ring slice
 		- parameter endAngle:    The end angle of the ring slice
-
+		
 		- returns: A UIBezierPath with the shape of a ring slice.
 		*/
 		func getArcPath(arcCenter: CGPoint, innerRadius: CGFloat,
@@ -203,7 +210,7 @@ public class MTCircularSlider: UIControl {
 			
 			return arcPath
 		}
-
+		
 		/**
 		Clips the drawing to the MTCircularSlider track.
 		*/
@@ -218,7 +225,7 @@ public class MTCircularSlider: UIControl {
 			
 			clipPath.addClip()
 		}
-
+		
 		/**
 		Fills the part of the track between the mininum angle and the thumb.
 		*/
@@ -230,7 +237,7 @@ public class MTCircularSlider: UIControl {
 			                              outerRadius: outerControlRadius,
 			                              startAngle: minAngle,
 			                              endAngle: thumbAngle)
-
+			
 			minTrackTint.setFill()
 			progressPath.fill()
 		}
@@ -239,13 +246,13 @@ public class MTCircularSlider: UIControl {
 			CGContextClipToRect(context, CGRectInfinite)
 			CGContextSetShadow(context, CGSizeMake(0, depth), radius)
 		}
-
+		
 		func drawTrack(context: CGContext) {
 			let trackPath = circlePath(withCenter: viewCenter,
 			                           radius: outerControlRadius)
 			maxTrackTint.setFill()
 			trackPath.fill()
-
+			
 			if trackShadowDepth > 0 {
 				setShadow(context, depth: trackShadowDepth, radius: trackShadowRadius)
 			}
@@ -271,15 +278,11 @@ public class MTCircularSlider: UIControl {
 		}
 		
 		func drawThumb() {
-			var thumbCenter = viewCenter
-			thumbCenter.x += CGFloat(cos(thumbAngle)) * controlRadius
-			thumbCenter.y += CGFloat(sin(thumbAngle)) * controlRadius
-
 			let thumbPath = circlePath(withCenter: thumbCenter,
 			                           radius: thumbRadius)
-
+			
 			let thumbHasShadow = thumbShadowDepth != 0 || thumbShadowRadius != 0
-
+			
 			if hasThumb && thumbHasShadow {
 				thumbLayer.path = thumbPath.CGPath
 				thumbLayer.fillColor = thumbTint.CGColor
@@ -293,25 +296,25 @@ public class MTCircularSlider: UIControl {
 			} else {
 				thumbLayer.path = nil
 				thumbLayer.shadowPath = nil
-
+				
 				if hasThumb {
 					thumbTint.setFill()
 					thumbPath.fill()
 				}
 			}
 		}
-
+		
 		let context = UIGraphicsGetCurrentContext()
 		CGContextSaveGState(context)
-
+		
 		clipPath()
-
+		
 		drawTrack(context!)
-
+		
 		CGContextRestoreGState(context)
-
+		
 		drawProgress()
-
+		
 		drawThumb()
 	}
 	
@@ -320,20 +323,29 @@ public class MTCircularSlider: UIControl {
 	                                   withEvent event: UIEvent?) -> Bool {
 		if hasThumb {
 			let location = touch.locationInView(self)
-
+			
 			let pseudoValue = calculatePseudoValue(at: location)
-			// Do not begin a gesture if the touch is out of our bounds.
+			// Check if the touch is out of our bounds.
 			if cappedValue(pseudoValue) != pseudoValue {
-				return false
+				// If the touch is on the thumb, start dragging from the thumb.
+				if locationOnThumb(location) {
+					lastPositionForTouch = location
+					calculatePseudoValue(at: thumbCenter)
+					return true
+					
+				} else {
+					// Not on thumb or track, so abort gesture.
+					return false
+				}
 			}
-
+			
 			value = pseudoValue
 			lastPositionForTouch = location
 		}
 		
 		return super.beginTrackingWithTouch(touch, withEvent: event)
 	}
-
+	
 	override
 	public func continueTrackingWithTouch(touch: UITouch,
 	                                      withEvent event: UIEvent?) -> Bool {
@@ -342,15 +354,14 @@ public class MTCircularSlider: UIControl {
 		}
 		
 		let location = touch.locationInView(self)
-
+		
 		value = calculatePseudoValue(from: lastPositionForTouch, to: location)
-		// setValueByPosition(location)
-
+		
 		lastPositionForTouch = location
-
+		
 		return true
 	}
-
+	
 	// Iterate over the provided attributes and set the corresponding values.
 	public func configure(attributes: [Attributes]) {
 		for attribute in attributes {
@@ -387,7 +398,7 @@ public class MTCircularSlider: UIControl {
 		
 		setNeedsDisplay()
 	}
-
+	
 	private func prepare() {
 		contentMode = .Redraw
 		opaque = false
@@ -408,24 +419,27 @@ public class MTCircularSlider: UIControl {
 		                    endAngle: CGFloat(M_PI * 2.0),
 		                    clockwise: true)
 	}
-
-	private func pan(gesture: UIGestureRecognizer) {
-		
+	
+	// True if the provided location is on the thumb, false otherwise.
+	private func locationOnThumb(location: CGPoint) -> Bool {
+		let thumbCenter = self.thumbCenter
+		return sqrt(pow(location.x - thumbCenter.x, 2) +
+			pow(location.y - thumbCenter.y, 2)) <= thumbRadius
 	}
-
+	
 	private func calculatePseudoValue(at point: CGPoint) -> Float {
 		let angle = angleAt(point)
-
+		
 		// Normalize the angle, then convert to value scale.
 		let targetValue =
 			Float(angle / (trackMaxAngle - trackMinAngle)) *
 				(valueMaximum - valueMinimum) + valueMinimum
-
+		
 		pseudoValueForTouch = targetValue
-
+		
 		return targetValue
 	}
-
+	
 	private func calculatePseudoValue(from from: CGPoint, to: CGPoint) -> Float {
 		let angle1 = angleAt(from)
 		let angle2 = angleAt(to)
@@ -437,17 +451,17 @@ public class MTCircularSlider: UIControl {
 			vector1: CGPoint(x: from.x - bounds.midX, y: from.y - bounds.midY),
 			vector2: CGPoint(x: to.x - from.x, y: to.y - from.y)
 		)
-
+		
 		if (clockwise) {
 			while (angle < 0) { angle += 360 }
-
+			
 		} else {
 			while (angle > 0) { angle -= 360 }
 		}
-
+		
 		// Update our value by as much as the last motion defined.
 		pseudoValueForTouch += Float(angle * angleToValue)
-
+		
 		// And make sure we don't count more than one whole circle of overflow.
 		if (pseudoValueForTouch > valueMinimum + valueRange * 2) {
 			pseudoValueForTouch -= valueRange
@@ -455,10 +469,10 @@ public class MTCircularSlider: UIControl {
 		if (pseudoValueForTouch < valueMinimum - valueRange) {
 			pseudoValueForTouch += valueRange
 		}
-
+		
 		return pseudoValueForTouch
 	}
-
+	
 	private func isClockwise(vector1 vector1: CGPoint, vector2: CGPoint) -> Bool {
 		return vector1.y * vector2.x < vector1.x * vector2.y
 	}
@@ -470,7 +484,7 @@ public class MTCircularSlider: UIControl {
 			M_PI * 180.0 + trackMinAngle) + 180
 		angle = (90 - angle) % 360
 		while (angle < 0) { angle += 360 }
-
+		
 		return angle
 	}
 }
