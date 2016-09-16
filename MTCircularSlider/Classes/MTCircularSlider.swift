@@ -305,13 +305,13 @@ public class MTCircularSlider: UIControl {
 		}
 		
 		let context = UIGraphicsGetCurrentContext()
-		CGContextSaveGState(context)
+		CGContextSaveGState(context!)
 		
 		clipPath()
 		
 		drawTrack(context!)
 		
-		CGContextRestoreGState(context)
+		CGContextRestoreGState(context!)
 		
 		drawProgress()
 		
