@@ -210,7 +210,7 @@ public class MTCircularSlider: UIControl {
 			
 			return arcPath
 		}
-		
+	
 		/**
 		Clips the drawing to the MTCircularSlider track.
 		*/
@@ -225,7 +225,7 @@ public class MTCircularSlider: UIControl {
 			
 			clipPath.addClip()
 		}
-		
+	
 		/**
 		Fills the part of the track between the mininum angle and the thumb.
 		*/
@@ -241,7 +241,7 @@ public class MTCircularSlider: UIControl {
 			minTrackTint.setFill()
 			progressPath.fill()
 		}
-		
+	
 		func setShadow(context: CGContext, depth: CGFloat, radius: CGFloat) {
 			CGContextClipToRect(context, CGRectInfinite)
 			CGContextSetShadow(context, CGSizeMake(0, depth), radius)
@@ -362,6 +362,13 @@ public class MTCircularSlider: UIControl {
 		return true
 	}
 	
+	/**
+	Returns the current angle of the thumb in degrees.
+	*/
+	public func getAngle() -> CGFloat {
+		return thumbAngle
+	}
+
 	// Iterate over the provided attributes and set the corresponding values.
 	public func configure(attributes: [Attributes]) {
 		for attribute in attributes {
