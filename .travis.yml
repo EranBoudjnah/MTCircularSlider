@@ -10,5 +10,5 @@ language: objective-c
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 script:
-- set -o pipefail && xcodebuild test -workspace Example/MTCircularSlider.xcworkspace -scheme MTCircularSlider-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -workspace Example/MTCircularSlider.xcworkspace -scheme MTCircularSlider-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination "platform=iOS Simulator,OS=10.0,name=iPhone 7" | xcpretty
 - pod lib lint
