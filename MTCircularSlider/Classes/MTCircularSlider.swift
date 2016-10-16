@@ -433,7 +433,8 @@ open class MTCircularSlider: UIControl {
 		return sqrt(pow(location.x - thumbCenter.x, 2) +
 			pow(location.y - thumbCenter.y, 2)) <= thumbRadius
 	}
-	
+
+	@discardableResult
 	fileprivate func calculatePseudoValue(at point: CGPoint) -> Float {
 		let angle = angleAt(point)
 		
