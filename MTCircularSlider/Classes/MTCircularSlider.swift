@@ -44,16 +44,16 @@ public enum Attributes {
 }
 
 @IBDesignable
-public class MTCircularSlider: UIControl {
+open class MTCircularSlider: UIControl {
 	@IBInspectable
 	var minTrackTint: UIColor = UIColor(red: 0.0, green: 0.478, blue: 1.0, alpha: 1.0)
 
 	@IBInspectable
 	var maxTrackTint: UIColor = UIColor(red: 0.71, green: 0.71, blue: 0.71, alpha: 1.0)
-	
+
 	@IBInspectable
 	var trackWidth: CGFloat = 2 { didSet { setNeedsDisplay() } }
-	
+
 	@IBInspectable
 	var trackShadowRadius: CGFloat = 0 { didSet { setNeedsDisplay() } }
 	
@@ -70,7 +70,7 @@ public class MTCircularSlider: UIControl {
 	var hasThumb: Bool = true { didSet { setNeedsDisplay() } }
 	
 	@IBInspectable
-	var thumbTint: UIColor = UIColor.whiteColor()
+	var thumbTint: UIColor = UIColor.white
 	
 	@IBInspectable
 	var thumbRadius: CGFloat = 14 { didSet { setNeedsDisplay() } }
@@ -82,18 +82,18 @@ public class MTCircularSlider: UIControl {
 	var thumbShadowDepth: CGFloat = 3 { didSet { setNeedsDisplay() } }
 	
 	@IBInspectable
-	public var value: Float = 0.5 {
+	open var value: Float = 0.5 {
 		didSet {
 			let cappedVal = cappedValue(value)
 			if value != cappedVal { value = cappedVal }
 			setNeedsDisplay()
 			
-			sendActionsForControlEvents(.ValueChanged)
+			sendActions(for: .valueChanged)
 		}
 	}
 	
 	@IBInspectable
-	public var valueMinimum: Float = 0 {
+	open var valueMinimum: Float = 0 {
 		didSet {
 			value = cappedValue(value)
 			setNeedsDisplay()
@@ -101,44 +101,44 @@ public class MTCircularSlider: UIControl {
 	}
 	
 	@IBInspectable
-	public var valueMaximum: Float = 1 {
+	open var valueMaximum: Float = 1 {
 		didSet {
 			value = cappedValue(value)
 			setNeedsDisplay()
 		}
 	}
 	
-	private var thumbLayer = CAShapeLayer()
+	fileprivate var thumbLayer = CAShapeLayer()
 	
-	private var viewCenter: CGPoint {
-		return convertPoint(center, fromView: superview)
+	fileprivate var viewCenter: CGPoint {
+		return convert(center, from: superview)
 	}
 	
-	private var thumbCenter: CGPoint {
+	fileprivate var thumbCenter: CGPoint {
 		var thumbCenter = viewCenter
 		thumbCenter.x += CGFloat(cos(thumbAngle)) * controlRadius
 		thumbCenter.y += CGFloat(sin(thumbAngle)) * controlRadius
 		return thumbCenter
 	}
 	
-	private var controlRadius: CGFloat {
+	fileprivate var controlRadius: CGFloat {
 		return min(bounds.width, bounds.height) / 2.0 - controlThickness
 	}
 	
-	private var controlThickness: CGFloat {
+	fileprivate var controlThickness: CGFloat {
 		let thumbRadius = (hasThumb) ? self.thumbRadius : 0
 		return max(thumbRadius, trackWidth / 2.0)
 	}
 	
-	private var innerControlRadius: CGFloat {
+	fileprivate var innerControlRadius: CGFloat {
 		return controlRadius - trackWidth * 0.5
 	}
 	
-	private var outerControlRadius: CGFloat {
+	fileprivate var outerControlRadius: CGFloat {
 		return controlRadius + trackWidth * 0.5
 	}
 	
-	private var thumbAngle: CGFloat {
+	fileprivate var thumbAngle: CGFloat {
 		let normalizedValue = (value - valueMinimum) / (valueMaximum - valueMinimum)
 		let degrees = Double(normalizedValue) * (trackMaxAngle - trackMinAngle) +
 		trackMinAngle
@@ -148,12 +148,12 @@ public class MTCircularSlider: UIControl {
 		return CGFloat(radians)
 	}
 	
-	private var lastPositionForTouch = CGPointZero
+	fileprivate var lastPositionForTouch = CGPoint.zero
 	
-	private var pseudoValueForTouch = Float(0.0)
+	fileprivate var pseudoValueForTouch = Float(0.0)
 	
 	override
-	public var center: CGPoint {
+	open var center: CGPoint {
 		didSet { setNeedsDisplay() }
 	}
 	
@@ -171,7 +171,7 @@ public class MTCircularSlider: UIControl {
 	}
 	
 	override
-	public func prepareForInterfaceBuilder() {
+	open func prepareForInterfaceBuilder() {
 		prepare()
 		
 		// Due to a bug in XCode, the shadow is misplaced in Interface Builder.
@@ -180,7 +180,7 @@ public class MTCircularSlider: UIControl {
 	}
 	
 	override
-	public func drawRect(rect: CGRect) {
+	open func draw(_ rect: CGRect) {
 		/**
 		Returns a UIBezierPath with the shape of a ring slice.
 		
@@ -192,25 +192,25 @@ public class MTCircularSlider: UIControl {
 		
 		- returns: A UIBezierPath with the shape of a ring slice.
 		*/
-		func getArcPath(arcCenter: CGPoint, innerRadius: CGFloat,
-		                outerRadius: CGFloat, startAngle: CGFloat,
-		                endAngle: CGFloat) -> UIBezierPath {
+		func getArcPath(_ arcCenter: CGPoint, innerRadius: CGFloat,
+		                  outerRadius: CGFloat, startAngle: CGFloat,
+		                  endAngle: CGFloat) -> UIBezierPath {
 			let arcPath = UIBezierPath(arcCenter: arcCenter,
 			                           radius: outerRadius,
 			                           startAngle: startAngle,
 			                           endAngle: endAngle,
 			                           clockwise: true)
 			
-			arcPath.addArcWithCenter(viewCenter,
-			                         radius: innerRadius,
-			                         startAngle: endAngle,
-			                         endAngle: startAngle,
-			                         clockwise: false)
-			arcPath.closePath()
+			arcPath.addArc(withCenter: viewCenter,
+			               radius: innerRadius,
+			               startAngle: endAngle,
+			               endAngle: startAngle,
+			               clockwise: false)
+			arcPath.close()
 			
 			return arcPath
 		}
-	
+		
 		/**
 		Clips the drawing to the MTCircularSlider track.
 		*/
@@ -225,7 +225,7 @@ public class MTCircularSlider: UIControl {
 			
 			clipPath.addClip()
 		}
-	
+		
 		/**
 		Fills the part of the track between the mininum angle and the thumb.
 		*/
@@ -241,13 +241,13 @@ public class MTCircularSlider: UIControl {
 			minTrackTint.setFill()
 			progressPath.fill()
 		}
-	
-		func setShadow(context: CGContext, depth: CGFloat, radius: CGFloat) {
-			CGContextClipToRect(context, CGRectInfinite)
-			CGContextSetShadow(context, CGSizeMake(0, depth), radius)
+		
+		func setShadow(_ context: CGContext, depth: CGFloat, radius: CGFloat) {
+			context.clip(to: CGRect.infinite)
+			context.setShadow(offset: CGSize(width: 0, height: depth), blur: radius)
 		}
 		
-		func drawTrack(context: CGContext) {
+		func drawTrack(_ context: CGContext) {
 			let trackPath = circlePath(withCenter: viewCenter,
 			                           radius: outerControlRadius)
 			maxTrackTint.setFill()
@@ -257,23 +257,23 @@ public class MTCircularSlider: UIControl {
 				setShadow(context, depth: trackShadowDepth, radius: trackShadowRadius)
 			}
 			
-			let trackShadowPath = UIBezierPath(rect: CGRectInfinite)
+			let trackShadowPath = UIBezierPath(rect: CGRect.infinite)
 			
-			trackShadowPath.appendPath(
+			trackShadowPath.append(
 				circlePath(withCenter: viewCenter,
 					radius: CGFloat(outerControlRadius + 0.5))
 			)
 			
-			trackShadowPath.closePath()
+			trackShadowPath.close()
 			
-			trackShadowPath.appendPath(
+			trackShadowPath.append(
 				circlePath(withCenter: viewCenter,
 					radius: CGFloat(innerControlRadius - 0.5))
 			)
 			
 			trackShadowPath.usesEvenOddFillRule = true
 			
-			UIColor.blackColor().set()
+			UIColor.black.set()
 			trackShadowPath.fill()
 		}
 		
@@ -284,11 +284,11 @@ public class MTCircularSlider: UIControl {
 			let thumbHasShadow = thumbShadowDepth != 0 || thumbShadowRadius != 0
 			
 			if hasThumb && thumbHasShadow {
-				thumbLayer.path = thumbPath.CGPath
-				thumbLayer.fillColor = thumbTint.CGColor
+				thumbLayer.path = thumbPath.cgPath
+				thumbLayer.fillColor = thumbTint.cgColor
 				
-				thumbLayer.shadowColor = UIColor.blackColor().CGColor
-				thumbLayer.shadowPath = thumbPath.CGPath
+				thumbLayer.shadowColor = UIColor.black.cgColor
+				thumbLayer.shadowPath = thumbPath.cgPath
 				thumbLayer.shadowOffset = CGSize(width: 0, height: thumbShadowDepth)
 				thumbLayer.shadowOpacity = 0.25
 				thumbLayer.shadowRadius = thumbShadowRadius
@@ -305,13 +305,13 @@ public class MTCircularSlider: UIControl {
 		}
 		
 		let context = UIGraphicsGetCurrentContext()
-		CGContextSaveGState(context!)
+		context!.saveGState()
 		
 		clipPath()
 		
 		drawTrack(context!)
 		
-		CGContextRestoreGState(context!)
+		context!.restoreGState()
 		
 		drawProgress()
 		
@@ -319,10 +319,10 @@ public class MTCircularSlider: UIControl {
 	}
 	
 	override
-	public func beginTrackingWithTouch(touch: UITouch,
-	                                   withEvent event: UIEvent?) -> Bool {
+	open func beginTracking(_ touch: UITouch,
+	                          with event: UIEvent?) -> Bool {
 		if hasThumb {
-			let location = touch.locationInView(self)
+			let location = touch.location(in: self)
 			
 			let pseudoValue = calculatePseudoValue(at: location)
 			// Check if the touch is out of our bounds.
@@ -343,34 +343,27 @@ public class MTCircularSlider: UIControl {
 			lastPositionForTouch = location
 		}
 		
-		return super.beginTrackingWithTouch(touch, withEvent: event)
+		return super.beginTracking(touch, with: event)
 	}
 	
 	override
-	public func continueTrackingWithTouch(touch: UITouch,
-	                                      withEvent event: UIEvent?) -> Bool {
+	open func continueTracking(_ touch: UITouch,
+	                             with event: UIEvent?) -> Bool {
 		if !hasThumb {
-			return super.continueTrackingWithTouch(touch, withEvent: event)
+			return super.continueTracking(touch, with: event)
 		}
 		
-		let location = touch.locationInView(self)
+		let location = touch.location(in: self)
 		
-		value = calculatePseudoValue(from: lastPositionForTouch, to: location)
+		value = calculatePseudoValue(lastPositionForTouch, to: location)
 		
 		lastPositionForTouch = location
 		
 		return true
 	}
 	
-	/**
-	Returns the current angle of the thumb in degrees.
-	*/
-	public func getAngle() -> CGFloat {
-		return thumbAngle
-	}
-
 	// Iterate over the provided attributes and set the corresponding values.
-	public func configure(attributes: [Attributes]) {
+	open func configure(_ attributes: [Attributes]) {
 		for attribute in attributes {
 			switch attribute {
 				/* Track */
@@ -406,20 +399,20 @@ public class MTCircularSlider: UIControl {
 		setNeedsDisplay()
 	}
 	
-	private func prepare() {
-		contentMode = .Redraw
-		opaque = false
-		backgroundColor = .clearColor()
-		
-		layer.insertSublayer(thumbLayer, atIndex: 0)
+	fileprivate func prepare() {
+		contentMode = .redraw
+		isOpaque = false
+		backgroundColor = UIColor.clear
+
+		layer.insertSublayer(thumbLayer, at: 0)
 	}
 	
-	private func cappedValue(value: Float) -> Float {
+	fileprivate func cappedValue(_ value: Float) -> Float {
 		return min(max(valueMinimum, value), valueMaximum)
 	}
 	
-	private func circlePath(withCenter center: CGPoint,
-	                                   radius: CGFloat) -> UIBezierPath {
+	fileprivate func circlePath(withCenter center: CGPoint,
+	                                       radius: CGFloat) -> UIBezierPath {
 		return UIBezierPath(arcCenter: center,
 		                    radius: radius,
 		                    startAngle: 0,
@@ -428,13 +421,13 @@ public class MTCircularSlider: UIControl {
 	}
 	
 	// True if the provided location is on the thumb, false otherwise.
-	private func locationOnThumb(location: CGPoint) -> Bool {
+	fileprivate func locationOnThumb(_ location: CGPoint) -> Bool {
 		let thumbCenter = self.thumbCenter
 		return sqrt(pow(location.x - thumbCenter.x, 2) +
 			pow(location.y - thumbCenter.y, 2)) <= thumbRadius
 	}
 	
-	private func calculatePseudoValue(at point: CGPoint) -> Float {
+	fileprivate func calculatePseudoValue(at point: CGPoint) -> Float {
 		let angle = angleAt(point)
 		
 		// Normalize the angle, then convert to value scale.
@@ -447,7 +440,7 @@ public class MTCircularSlider: UIControl {
 		return targetValue
 	}
 	
-	private func calculatePseudoValue(from from: CGPoint, to: CGPoint) -> Float {
+	fileprivate func calculatePseudoValue(_ from: CGPoint, to: CGPoint) -> Float {
 		let angle1 = angleAt(from)
 		let angle2 = angleAt(to)
 		var angle = angle2 - angle1
@@ -455,7 +448,7 @@ public class MTCircularSlider: UIControl {
 		let angleToValue =
 			Double(valueRange) / (trackMaxAngle - trackMinAngle)
 		let clockwise = isClockwise(
-			vector1: CGPoint(x: from.x - bounds.midX, y: from.y - bounds.midY),
+			CGPoint(x: from.x - bounds.midX, y: from.y - bounds.midY),
 			vector2: CGPoint(x: to.x - from.x, y: to.y - from.y)
 		)
 		
@@ -480,16 +473,16 @@ public class MTCircularSlider: UIControl {
 		return pseudoValueForTouch
 	}
 	
-	private func isClockwise(vector1 vector1: CGPoint, vector2: CGPoint) -> Bool {
+	fileprivate func isClockwise(_ vector1: CGPoint, vector2: CGPoint) -> Bool {
 		return vector1.y * vector2.x < vector1.x * vector2.y
 	}
 	
-	private func angleAt(point: CGPoint) -> Double {
+	fileprivate func angleAt(_ point: CGPoint) -> Double {
 		// Calculate the relative angle of the user's touch point starting from
 		// trackMinAngle.
 		var angle = (Double(atan2(point.x - bounds.midX, point.y - bounds.midY)) /
 			M_PI * 180.0 + trackMinAngle) + 180
-		angle = (90 - angle) % 360
+		angle = (90 - angle).truncatingRemainder(dividingBy: 360)
 		while (angle < 0) { angle += 360 }
 		
 		return angle

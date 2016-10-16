@@ -9,7 +9,7 @@ class Tests: XCTestCase {
 	override func setUp() {
 		super.setUp()
 		
-		slider = MTCircularSlider(frame: CGRect(origin: CGPointZero, size: CGSize(width: 100, height: 100)))
+		slider = MTCircularSlider(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: 100)))
 	}
 	
 	override func tearDown() {
@@ -58,37 +58,37 @@ class Tests: XCTestCase {
 		XCTAssertEqual(slider.trackShadowDepth, 0)
 		XCTAssertEqual(slider.trackMinAngle, 0)
 		XCTAssertEqual(slider.trackMaxAngle, 360)
-		
+
 		/* Thumb */
 		XCTAssertEqual(slider.hasThumb, true)
-		XCTAssertEqual(slider.thumbTint, UIColor.whiteColor())
+		XCTAssertEqual(slider.thumbTint, .white)
 		XCTAssertEqual(slider.thumbRadius, 14)
 		XCTAssertEqual(slider.thumbShadowRadius, 2)
 		XCTAssertEqual(slider.thumbShadowDepth, 3)
 		
 		let newAttributes: [Attributes] = [
 			/* Track */
-			.minTrackTint(UIColor.blackColor()),
-			.maxTrackTint(UIColor.redColor()),
-			.trackWidth(10),
-			.trackShadowRadius(5),
-			.trackShadowDepth(4),
-			.trackMinAngle(90),
-			.trackMaxAngle(270),
-			
+			Attributes.minTrackTint(.black),
+			Attributes.maxTrackTint(.red),
+			Attributes.trackWidth(10),
+			Attributes.trackShadowRadius(5),
+			Attributes.trackShadowDepth(4),
+			Attributes.trackMinAngle(90),
+			Attributes.trackMaxAngle(270),
+
 			/* Thumb */
-			.hasThumb(false),
-			.thumbTint(UIColor.greenColor()),
-			.thumbRadius(8),
-			.thumbShadowRadius(0),
-			.thumbShadowDepth(4)
+			Attributes.hasThumb(false),
+			Attributes.thumbTint(UIColor.green),
+			Attributes.thumbRadius(8),
+			Attributes.thumbShadowRadius(0),
+			Attributes.thumbShadowDepth(4)
 		]
 		
 		slider.configure(newAttributes)
 		
 		/* Track */
-		XCTAssertEqual(slider.minTrackTint, UIColor.blackColor())
-		XCTAssertEqual(slider.maxTrackTint, UIColor.redColor())
+		XCTAssertEqual(slider.minTrackTint, UIColor.black)
+		XCTAssertEqual(slider.maxTrackTint, UIColor.red)
 		XCTAssertEqual(slider.trackWidth, 10)
 		XCTAssertEqual(slider.trackShadowRadius, 5)
 		XCTAssertEqual(slider.trackShadowDepth, 4)
@@ -97,7 +97,7 @@ class Tests: XCTestCase {
 		
 		/* Thumb */
 		XCTAssertEqual(slider.hasThumb, false)
-		XCTAssertEqual(slider.thumbTint, UIColor.greenColor())
+		XCTAssertEqual(slider.thumbTint, UIColor.green)
 		XCTAssertEqual(slider.thumbRadius, 8)
 		XCTAssertEqual(slider.thumbShadowRadius, 0)
 		XCTAssertEqual(slider.thumbShadowDepth, 4)
