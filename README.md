@@ -135,7 +135,7 @@ Sets the distance of the shadow the thumb from the thumb.
 
 ## Functions
 
-###### ``getThumbAngle()``
+###### ``getThumbAngle() -> CGFloat``
 
 Returns the current angle of the thumb in radians.
 

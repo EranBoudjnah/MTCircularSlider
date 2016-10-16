@@ -402,7 +402,7 @@ open class MTCircularSlider: UIControl {
 	/**
 	Returns the current angle of the thumb in radians.
 	*/
-	open func getThumbAngle() -> Float {
+	open func getThumbAngle() -> CGFloat {
 		return thumbAngle
 	}
 	
