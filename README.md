@@ -60,20 +60,20 @@ To add a custom circular slider, add the following code to your controller:
 ```swift
 let attributes = [
 /* Track */
-.minTrackTint(UIColor.lightGrayColor()),
-.maxTrackTint(UIColor.lightGrayColor()),
-.trackWidth(12),
-.trackShadowRadius(0),
-.trackShadowDepth(0),
-.trackMinAngle(180),
-.trackMaxAngle(270),
+Attributes.minTrackTint(.lightGray),
+Attributes.maxTrackTint(.lightGray),
+Attributes.trackWidth(12),
+Attributes.trackShadowRadius(0),
+Attributes.trackShadowDepth(0),
+Attributes.trackMinAngle(180),
+Attributes.trackMaxAngle(270),
 
 /* Thumb */
-.hasThumb(true),
-.thumbTint(UIColor.darkGrayColor()),
-.thumbRadius(8),
-.thumbShadowRadius(0),
-.thumbShadowDepth(0)
+Attributes.hasThumb(true),
+Attributes.thumbTint(UIColor.darkGrayColor()),
+Attributes.thumbRadius(8),
+Attributes.thumbShadowRadius(0),
+Attributes.thumbShadowDepth(0)
 ]
 
 self.slider = MTCircularSlider(frame: self.sliderArea.bounds, options: nil)
@@ -132,6 +132,13 @@ Sets the radius of the shadow the thumb drops.
 ###### ``thumbShadowDepth(CGFloat)``
 
 Sets the distance of the shadow the thumb from the thumb.
+
+## Functions
+
+###### ``getThumbAngle()``
+
+Returns the current angle of the thumb in radians.
+
 
 ## Author
 
