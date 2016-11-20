@@ -38,7 +38,8 @@ public enum Attributes {
 	case trackShadowDepth(CGFloat)
 	case trackMinAngle(Double)
 	case trackMaxAngle(Double)
-	
+	case maxWinds(Float)
+
 	/* Thumb */
 	case hasThumb(Bool)
 	case thumbTint(UIColor)
@@ -424,7 +425,9 @@ open class MTCircularSlider: UIControl {
 				self.trackMinAngle = value
 			case let .trackMaxAngle(value):
 				self.trackMaxAngle = value
-				
+			case let .maxWinds(value):
+				self.maxWinds = value
+
 				/* Thumb */
 			case let .hasThumb(value):
 				self.hasThumb = value
