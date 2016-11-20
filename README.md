@@ -96,6 +96,8 @@ Sets the color of the track from the thumb to the end of the track.
 
 Sets the width of the track in points.
 
+Default value: 2
+
 ###### ``trackShadowRadius(CGFloat)``
 
 Sets the radius for the inner shadow on the track.
@@ -108,9 +110,21 @@ Sets the distance of the inner shadow on the track from the track edge.
 
 Sets the minimum angle of the track in degrees.
 
+Default value: 0
+
 ###### ``trackMaxAngle(Double)``
 
 Sets the maximum angle of the track in degrees.
+
+Default value: 360
+
+###### ``maxWinds(Float)``
+
+Sets the maximum number of times a user can wind the control. If set to a value
+other than 1, the difference between the minimum and maximum angles must be
+exactly 360 degrees.
+
+Default value: 1
 
 ###### ``hasThumb(Bool)``
 
