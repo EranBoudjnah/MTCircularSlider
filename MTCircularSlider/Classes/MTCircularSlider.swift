@@ -492,10 +492,9 @@ open class MTCircularSlider: UIControl {
 			ceil((value - valueMinimum) / range)
 
 		// Normalize the angle, then convert to value scale.
+		let angleRange = trackMaxAngle - trackMinAngle
 		let targetValue =
-			Float(angle / (trackMaxAngle - trackMinAngle)) *
-				(valueMaximum - valueMinimum) + valueMinimum +
-				(windings - 1) * range
+			(Float(angle) / Float(angleRange) + windings - 1) * range + Float(valueMinimum)
 
 		pseudoValueForTouch = targetValue
 
