@@ -280,7 +280,6 @@ open class MTCircularSlider: UIControl {
 		Fills the part of the track between the mininum angle and the thumb.
 		*/
 		func drawProgress() {
-			let directionMultiplier = CGFloat(isLeftToRight ? 1 : -1)
 			let minAngle = CGFloat(trackMinAngle / 180.0 * M_PI + M_PI)
 
 			let progressPath =
