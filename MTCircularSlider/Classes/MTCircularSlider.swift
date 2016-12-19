@@ -148,6 +148,15 @@ open class MTCircularSlider: UIControl {
 		}
 	}
 
+	fileprivate var isLeftToRight: Bool {
+		if #available(iOS 9.0, *) {
+			return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) == UIUserInterfaceLayoutDirection.leftToRight
+		} else {
+			// Fallback on earlier versions
+			return true
+		}
+	}
+	
 	fileprivate var thumbLayer = CAShapeLayer()
 	
 	fileprivate var viewCenter: CGPoint {
@@ -156,8 +165,9 @@ open class MTCircularSlider: UIControl {
 	
 	fileprivate var thumbCenter: CGPoint {
 		var thumbCenter = viewCenter
-		thumbCenter.x += CGFloat(cos(thumbAngle)) * controlRadius
-		thumbCenter.y += CGFloat(sin(thumbAngle)) * controlRadius
+		let angle = rtlAwareAngle(thumbAngle)
+		thumbCenter.x += CGFloat(cos(angle)) * controlRadius
+		thumbCenter.y += CGFloat(sin(angle)) * controlRadius
 		return thumbCenter
 	}
 	
@@ -270,18 +280,26 @@ open class MTCircularSlider: UIControl {
 		Fills the part of the track between the mininum angle and the thumb.
 		*/
 		func drawProgress() {
+			let directionMultiplier = CGFloat(isLeftToRight ? 1 : -1)
 			let minAngle = CGFloat(trackMinAngle / 180.0 * M_PI + M_PI)
-			
-			let progressPath = getArcPath(viewCenter,
+
+			let progressPath =
+				isLeftToRight ?
+					getArcPath(viewCenter,
 			                              innerRadius: innerControlRadius,
 			                              outerRadius: outerControlRadius,
-			                              startAngle: minAngle,
-			                              endAngle: thumbAngle)
-			
+			                              startAngle: rtlAwareAngle(minAngle),
+			                              endAngle: rtlAwareAngle(thumbAngle)) :
+					getArcPath(viewCenter,
+					           innerRadius: innerControlRadius,
+					           outerRadius: outerControlRadius,
+					           startAngle: rtlAwareAngle(thumbAngle),
+					           endAngle: rtlAwareAngle(minAngle))
+
 			minTrackTint.setFill()
 			progressPath.fill()
 		}
-		
+
 		func setShadow(_ context: CGContext, depth: CGFloat, radius: CGFloat) {
 			context.clip(to: CGRect.infinite)
 			context.setShadow(offset: CGSize(width: 0, height: depth), blur: radius)
@@ -357,7 +375,11 @@ open class MTCircularSlider: UIControl {
 		
 		drawThumb()
 	}
-	
+
+	fileprivate func rtlAwareAngle(_ angle: CGFloat) -> CGFloat {
+		return isLeftToRight ? angle : CGFloat(M_PI) - angle
+	}
+
 	override
 	open func beginTracking(_ touch: UITouch,
 	                          with event: UIEvent?) -> Bool {
@@ -512,8 +534,8 @@ open class MTCircularSlider: UIControl {
 			CGPoint(x: from.x - bounds.midX, y: from.y - bounds.midY),
 			vector2: CGPoint(x: to.x - from.x, y: to.y - from.y)
 		)
-		
-		if (clockwise) {
+
+		if (clockwise == isLeftToRight) {
 			while (angle < 0) { angle += 360 }
 			
 		} else {
@@ -543,9 +565,12 @@ open class MTCircularSlider: UIControl {
 		// trackMinAngle.
 		var angle = (Double(atan2(point.x - bounds.midX, point.y - bounds.midY)) /
 			M_PI * 180.0 + trackMinAngle) + 180
+		if (!isLeftToRight) {
+			angle = 360 - angle
+		}
 		angle = (90 - angle).truncatingRemainder(dividingBy: 360)
 		while (angle < 0) { angle += 360 }
-		
+
 		return angle
 	}
 	
