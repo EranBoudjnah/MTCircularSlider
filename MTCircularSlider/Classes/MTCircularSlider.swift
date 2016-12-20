@@ -368,8 +368,8 @@ open class MTCircularSlider: UIControl {
 				}
 			}
             
-               thumbLayer.strokeColor = thumbBorderColor.cgColor
-               thumbLayer.lineWidth = thumbBorderWidth
+                    thumbLayer.strokeColor = thumbBorderColor.cgColor
+                    thumbLayer.lineWidth = thumbBorderWidth
             
 		}
 		
