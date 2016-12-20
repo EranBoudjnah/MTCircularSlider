@@ -46,8 +46,8 @@ public enum Attributes {
 	case thumbRadius(CGFloat)
 	case thumbShadowRadius(CGFloat)
 	case thumbShadowDepth(CGFloat)
-       case thumbBorderWidth(CGFloat)
-       case thumbBorderColor(UIColor)
+    case thumbBorderWidth(CGFloat)
+    case thumbBorderColor(UIColor)
 }
 
 @IBDesignable
@@ -368,8 +368,8 @@ open class MTCircularSlider: UIControl {
 				}
 			}
             
-                    thumbLayer.strokeColor = thumbBorderColor.cgColor
-                    thumbLayer.lineWidth = thumbBorderWidth
+            thumbLayer.strokeColor = thumbBorderColor.cgColor
+            thumbLayer.lineWidth = thumbBorderWidth
             
 		}
 		
