@@ -46,6 +46,8 @@ public enum Attributes {
 	case thumbRadius(CGFloat)
 	case thumbShadowRadius(CGFloat)
 	case thumbShadowDepth(CGFloat)
+	case thumbBorderWidth(CGFloat)
+	case thumbBorderColor(UIColor)
 }
 
 @IBDesignable
@@ -107,6 +109,12 @@ open class MTCircularSlider: UIControl {
 
 	@IBInspectable
 	var thumbShadowDepth: CGFloat = 3 { didSet { setNeedsDisplay() } }
+
+	@IBInspectable
+	var thumbBorderWidth: CGFloat = 0 { didSet { setNeedsDisplay() } }
+
+	@IBInspectable
+	var thumbBorderColor: UIColor = UIColor.lightGray
 
 	@IBInspectable
 	open var value: Float = 0.5 {
@@ -359,8 +367,11 @@ open class MTCircularSlider: UIControl {
 					thumbPath.fill()
 				}
 			}
+
+			thumbLayer.strokeColor = thumbBorderColor.cgColor
+			thumbLayer.lineWidth = thumbBorderWidth
 		}
-		
+
 		let context = UIGraphicsGetCurrentContext()
 		context!.saveGState()
 		
@@ -460,12 +471,16 @@ open class MTCircularSlider: UIControl {
 				self.thumbShadowRadius = value
 			case let .thumbShadowDepth(value):
 				self.thumbShadowDepth = value
+			case let .thumbBorderWidth(value):
+				self.thumbBorderWidth = value
+			case let .thumbBorderColor(value):
+				self.thumbBorderColor = value
 			}
 		}
-		
+
 		setNeedsDisplay()
 	}
-	
+
 	/**
 	Returns the current angle of the thumb in radians.
 	*/
