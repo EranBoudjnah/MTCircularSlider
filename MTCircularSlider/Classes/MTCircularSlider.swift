@@ -46,8 +46,8 @@ public enum Attributes {
 	case thumbRadius(CGFloat)
 	case thumbShadowRadius(CGFloat)
 	case thumbShadowDepth(CGFloat)
-    case thumbBorderWidth(CGFloat)
-    case thumbBorderColor(UIColor)
+	case thumbBorderWidth(CGFloat)
+	case thumbBorderColor(UIColor)
 }
 
 @IBDesignable
