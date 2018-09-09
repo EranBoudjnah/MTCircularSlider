@@ -50,6 +50,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 1c4acaba914c1bcb2c9abf6ae49ca07b1dea1f02
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>MTCircularSlider</string>
 			<key>Type</key>

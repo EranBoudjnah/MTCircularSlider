@@ -15,18 +15,18 @@ class ViewController: UIViewController {
 	@IBOutlet weak var knobWithLabelView: MTCircularSlider!
 	@IBOutlet weak var knobView1: MTCircularSlider!
 	@IBOutlet weak var knobView2: MTCircularSlider!
-	
-	fileprivate var timer: Timer?
-	fileprivate var direction: Float = 0.01
-	
+
+	fileprivate var timer: Timer!
+	fileprivate var direction = 0.01
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		timer = Timer.scheduledTimer(timeInterval: 0.03,
-		                             target: self,
-		                             selector: #selector(update),
-		                             userInfo: nil,
-		                             repeats: true)
+																 target: self,
+																 selector: #selector(update),
+																 userInfo: nil,
+																 repeats: true)
 		
 		setValueLabelText()
 		
@@ -36,14 +36,14 @@ class ViewController: UIViewController {
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
-		timer!.invalidate()
+		timer.invalidate()
 	}
 	
 	@IBAction func onSlideChange(_ sender: MTCircularSlider) {
 		setValueLabelText()
 	}
-	
-	func update() {
+
+	@objc func update(timer: Timer) {
 		progressView.value += direction
 		knobView1.value = progressView.value
 		if progressView.value <= progressView.valueMinimum ||
@@ -66,11 +66,11 @@ class ViewController: UIViewController {
 			Attributes.trackShadowDepth(0),
 			Attributes.trackMinAngle(180),
 			Attributes.trackMaxAngle(360),
-
+			
 			/* Thumb */
 			Attributes.hasThumb(false)
 			])
-
+		
 		knobView1.valueMaximum = progressView.valueMaximum
 		
 		knobView2.configure([
@@ -82,14 +82,14 @@ class ViewController: UIViewController {
 			Attributes.trackShadowDepth(0),
 			Attributes.trackMinAngle(180),
 			Attributes.trackMaxAngle(270),
-
+			
 			/* Thumb */
 			Attributes.hasThumb(true),
 			Attributes.thumbTint(.darkGray),
 			Attributes.thumbRadius(8),
 			Attributes.thumbShadowRadius(0),
 			Attributes.thumbShadowDepth(0)
-		])
+			])
 		
 		knobView1.valueMaximum = progressView.valueMaximum
 	}
