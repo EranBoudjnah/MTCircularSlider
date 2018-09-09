@@ -7,7 +7,7 @@
 
 ## Screenshot
 
-<img src="http://s33.postimg.org/m3w4j8ecv/Simulator_Screen_Shot_2_Jun_2016_13_35_42.png" width="360" height="640" title="Screenshot from Simulator" alt="Screenshot from Simulator" />
+![Screenshot from Simulator](https://raw.githubusercontent.com/EranBoudjnah/MTCircularSlider/screenshots/screenshots/Simulator%20Screen%20Shot%202%20Jun%202016%2C%2013.35.42.png)
 
 ## Usage
 
