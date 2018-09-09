@@ -270,7 +270,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MTCircularSlider_Example/Pods-MTCircularSlider_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MTCircularSlider_Example/Pods-MTCircularSlider_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MTCircularSlider/MTCircularSlider.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -279,7 +279,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MTCircularSlider_Example/Pods-MTCircularSlider_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MTCircularSlider_Example/Pods-MTCircularSlider_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		684089974648D39FE0BA420E /* [CP] Check Pods Manifest.lock */ = {
@@ -306,7 +306,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MTCircularSlider_Tests/Pods-MTCircularSlider_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MTCircularSlider_Tests/Pods-MTCircularSlider_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MTCircularSlider/MTCircularSlider.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -315,7 +315,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MTCircularSlider_Tests/Pods-MTCircularSlider_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MTCircularSlider_Tests/Pods-MTCircularSlider_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F02D09FC806AB74E29B0EDD2 /* [CP] Check Pods Manifest.lock */ = {
