@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var knobView2: MTCircularSlider!
 
 	fileprivate var timer: Timer!
-	fileprivate var direction = 0.01
+	fileprivate var direction: CGFloat = 0.01
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
