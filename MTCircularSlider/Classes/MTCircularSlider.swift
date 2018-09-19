@@ -36,9 +36,9 @@ public enum Attributes {
 	case trackWidth(CGFloat)
 	case trackShadowRadius(CGFloat)
 	case trackShadowDepth(CGFloat)
-	case trackMinAngle(Double)
-	case trackMaxAngle(Double)
-	case maxWinds(Double)
+	case trackMinAngle(CGFloat)
+	case trackMaxAngle(CGFloat)
+	case maxWinds(CGFloat)
 
 	/* Thumb */
 	case hasThumb(Bool)
@@ -53,10 +53,10 @@ public enum Attributes {
 @IBDesignable
 open class MTCircularSlider: UIControl {
 	@IBInspectable
-	var minTrackTint = UIColor(red: 0.0, green: 0.478, blue: 1.0, alpha: 1.0)
+	var minTrackTint: UIColor = UIColor(red: 0.0, green: 0.478, blue: 1.0, alpha: 1.0)
 
 	@IBInspectable
-	var maxTrackTint = UIColor(red: 0.71, green: 0.71, blue: 0.71, alpha: 1.0)
+	var maxTrackTint: UIColor = UIColor(red: 0.71, green: 0.71, blue: 0.71, alpha: 1.0)
 
 	@IBInspectable
 	var trackWidth: CGFloat = 2.0 { didSet { setNeedsDisplay() } }
@@ -68,7 +68,7 @@ open class MTCircularSlider: UIControl {
 	var trackShadowDepth: CGFloat = 0.0 { didSet { setNeedsDisplay() } }
 
 	@IBInspectable
-	var trackMinAngle = 0.0 {
+	var trackMinAngle: CGFloat = 0.0 {
 		didSet {
 			do {
 				try noWindingIfNotFullCircle()
@@ -82,7 +82,7 @@ open class MTCircularSlider: UIControl {
 	}
 
 	@IBInspectable
-	var trackMaxAngle = 360.0 {
+	var trackMaxAngle: CGFloat = 360.0 {
 		didSet {
 			do {
 				try noWindingIfNotFullCircle()
@@ -96,10 +96,10 @@ open class MTCircularSlider: UIControl {
 	}
 
 	@IBInspectable
-	var hasThumb = true { didSet { setNeedsDisplay() } }
+	var hasThumb: Bool = true { didSet { setNeedsDisplay() } }
 
 	@IBInspectable
-	var thumbTint = UIColor.white
+	var thumbTint: UIColor = UIColor.white
 
 	@IBInspectable
 	var thumbRadius: CGFloat = 14 { didSet { setNeedsDisplay() } }
@@ -114,10 +114,10 @@ open class MTCircularSlider: UIControl {
 	var thumbBorderWidth: CGFloat = 0 { didSet { setNeedsDisplay() } }
 
 	@IBInspectable
-	var thumbBorderColor = UIColor.lightGray
+	var thumbBorderColor: UIColor = UIColor.lightGray
 
 	@IBInspectable
-	open var value = 0.5 {
+	open var value: CGFloat = 0.5 {
 		didSet {
 			let cappedVal = cappedValue(value, forWinds: maxWinds)
 			if value != cappedVal { value = cappedVal }
@@ -128,7 +128,7 @@ open class MTCircularSlider: UIControl {
 	}
 
 	@IBInspectable
-	open var valueMinimum = 0.0 {
+	open var valueMinimum: CGFloat = 0.0 {
 		didSet {
 			value = cappedValue(value)
 			setNeedsDisplay()
@@ -136,7 +136,7 @@ open class MTCircularSlider: UIControl {
 	}
 
 	@IBInspectable
-	open var valueMaximum = 1.0 {
+	open var valueMaximum: CGFloat = 1.0 {
 		didSet {
 			value = cappedValue(value)
 			setNeedsDisplay()
@@ -144,7 +144,7 @@ open class MTCircularSlider: UIControl {
 	}
 
 	@IBInspectable
-	open var maxWinds = 1.0 {
+	open var maxWinds: CGFloat = 1.0 {
 		didSet {
 			do {
 				try noWindingIfNotFullCircle()
@@ -205,28 +205,28 @@ open class MTCircularSlider: UIControl {
 		return CGFloat(radians)
 	}
 
-	fileprivate var lastPositionForTouch = CGPoint.zero
-	
-	fileprivate var pseudoValueForTouch = 0.0
-	
+	fileprivate var lastPositionForTouch: CGPoint = CGPoint.zero
+
+	fileprivate var pseudoValueForTouch: CGFloat = 0.0
+
 	override
 	open var center: CGPoint {
 		didSet { setNeedsDisplay() }
 	}
-	
+
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 
 		prepare()
 	}
-	
+
 	required
 	public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 
 		prepare()
 	}
-	
+
 	override
 	open func prepareForInterfaceBuilder() {
 		prepare()
@@ -235,12 +235,12 @@ open class MTCircularSlider: UIControl {
 		thumbShadowDepth = -thumbShadowDepth * 2
 		thumbShadowRadius *= 2
 	}
-	
+
 	override
 	open func draw(_ rect: CGRect) {
 		/**
 		Returns a UIBezierPath with the shape of a ring slice.
-		
+	
 		- parameter arcCenter:   The center of the ring
 		- parameter innerRadius: The inner radius of the ring
 		- parameter outerRadius: The outer radius of the ring
@@ -511,11 +511,11 @@ open class MTCircularSlider: UIControl {
 		layer.insertSublayer(thumbLayer, at: 0)
 	}
 
-	fileprivate func cappedValue(_ value: Double) -> Double {
+	fileprivate func cappedValue(_ value: CGFloat) -> CGFloat {
 		return cappedValue(value, forWinds: 1.0)
 	}
 
-	fileprivate func cappedValue(_ value: Double, forWinds: Double) -> Double {
+	fileprivate func cappedValue(_ value: CGFloat, forWinds: CGFloat) -> CGFloat {
 		return min(max(valueMinimum, value), valueMaximum + valueRange() * (maxWinds - 1.0))
 	}
 
@@ -536,7 +536,7 @@ open class MTCircularSlider: UIControl {
 	}
 
 	@discardableResult
-	fileprivate func calculatePseudoValue(at point: CGPoint) -> Double {
+	fileprivate func calculatePseudoValue(at point: CGPoint) -> CGFloat {
 		let angle = angleAt(point)
 		let range = valueRange()
 		let windings = value == valueMinimum ? 1 :
@@ -545,14 +545,14 @@ open class MTCircularSlider: UIControl {
 		// Normalize the angle, then convert to value scale.
 		let angleRange = trackMaxAngle - trackMinAngle
 		let targetValue =
-			(Double(angle) / Double(angleRange) + windings - 1.0) * range + valueMinimum
+			(angle / angleRange + windings - 1.0) * range + valueMinimum
 
 		pseudoValueForTouch = targetValue
 
 		return targetValue
 	}
 
-	fileprivate func calculatePseudoValue(_ from: CGPoint, to: CGPoint) -> Double {
+	fileprivate func calculatePseudoValue(_ from: CGPoint, to: CGPoint) -> CGFloat {
 		let angle1 = angleAt(from)
 		let angle2 = angleAt(to)
 		var angle = angle2 - angle1
@@ -588,7 +588,7 @@ open class MTCircularSlider: UIControl {
 		return vector1.y * vector2.x < vector1.x * vector2.y
 	}
 
-	fileprivate func angleAt(_ point: CGPoint) -> Double {
+	fileprivate func angleAt(_ point: CGPoint) -> CGFloat {
 		// Calculate the relative angle of the user's touch point starting from
 		// trackMinAngle.
 		var angle = (radiansToDegrees(atan2(point.x - bounds.midX, point.y - bounds.midY)) + trackMinAngle) + 180.0
@@ -607,15 +607,15 @@ open class MTCircularSlider: UIControl {
 		}
 	}
 
-	fileprivate func valueRange() -> Double {
+	fileprivate func valueRange() -> CGFloat {
 		return valueMaximum - valueMinimum
 	}
 
-	fileprivate func radiansToDegrees(_ angle: CGFloat) -> Double {
-		return Double(angle) / Double.pi * 180.0
+	fileprivate func radiansToDegrees(_ angle: CGFloat) -> CGFloat {
+		return angle / CGFloat(Double.pi) * 180.0
 	}
 
-	fileprivate func degreesToRadians(_ angle: Double) -> CGFloat {
-		return CGFloat(angle / 180.0 * Double.pi)
+	fileprivate func degreesToRadians(_ angle: CGFloat) -> CGFloat {
+		return angle / 180.0 * CGFloat(Double.pi)
 	}
 }

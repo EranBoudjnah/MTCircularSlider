@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="NNH-PZ-T02">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="NNH-PZ-T02">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,8 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p9F-Pm-sV6" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="304" y="64" width="112" height="112"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9F-Pm-sV6" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="191.5" y="97.5" width="112" height="112"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEY-R0-jQn">
                                         <rect key="frame" x="6" y="42" width="106" height="24"/>
@@ -88,8 +87,8 @@
                                     <action selector="onSlideChange:" destination="NNH-PZ-T02" eventType="valueChanged" id="hJO-To-zLJ"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y2A-sL-BVr" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="184" y="184" width="232" height="232"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2A-sL-BVr" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="71.5" y="217.5" width="232" height="232"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="y2A-sL-BVr" secondAttribute="height" multiplier="1:1" id="Fwh-ed-4rp"/>
@@ -134,24 +133,24 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9nI-1g-fCM" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="304" y="424" width="112" height="112"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nI-1g-fCM" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="191.5" y="457.5" width="112" height="112"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.041143767535686493" green="0.37646394968032837" blue="0.99607861042022705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9nI-1g-fCM" secondAttribute="height" multiplier="1:1" id="2Bz-rt-azB"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rse-9x-3ti" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="184" y="424" width="112" height="112"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rse-9x-3ti" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="71.5" y="457.5" width="112" height="112"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.041143767535686493" green="0.37646394968032837" blue="0.99607861042022705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Rse-9x-3ti" secondAttribute="height" multiplier="1:1" id="fdz-mW-421"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cXb-Fq-sZS" customClass="MTCircularSlider" customModule="MTCircularSlider">
-                                <rect key="frame" x="184" y="64" width="112" height="112"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXb-Fq-sZS" customClass="MTCircularSlider" customModule="MTCircularSlider">
+                                <rect key="frame" x="71.5" y="97.5" width="112" height="112"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.041143767535686493" green="0.37646394968032837" blue="0.99607861042022705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
