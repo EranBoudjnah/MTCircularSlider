@@ -21,24 +21,24 @@ class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
 		timer = Timer.scheduledTimer(timeInterval: 0.03,
-																 target: self,
-																 selector: #selector(update),
-																 userInfo: nil,
-																 repeats: true)
-		
+                                     target: self,
+                                     selector: #selector(update),
+                                     userInfo: nil,
+                                     repeats: true)
+
 		setValueLabelText()
-		
+
 		initCustomKnobs()
 	}
-	
+
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
-		
+
 		timer.invalidate()
 	}
-	
+
 	@IBAction func onSlideChange(_ sender: MTCircularSlider) {
 		setValueLabelText()
 	}
@@ -51,11 +51,11 @@ class ViewController: UIViewController {
 			direction = -direction
 		}
 	}
-	
+
 	fileprivate func setValueLabelText() {
 		valueLabel.text = String(Int(knobWithLabelView.value))
 	}
-	
+
 	fileprivate func initCustomKnobs() {
 		knobView1.configure([
 			/* Track */
@@ -66,13 +66,13 @@ class ViewController: UIViewController {
 			Attributes.trackShadowDepth(0),
 			Attributes.trackMinAngle(180),
 			Attributes.trackMaxAngle(360),
-			
+
 			/* Thumb */
 			Attributes.hasThumb(false)
 			])
-		
+
 		knobView1.valueMaximum = progressView.valueMaximum
-		
+
 		knobView2.configure([
 			/* Track */
 			Attributes.minTrackTint(.lightGray),
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
 			Attributes.trackShadowDepth(0),
 			Attributes.trackMinAngle(180),
 			Attributes.trackMaxAngle(270),
-			
+
 			/* Thumb */
 			Attributes.hasThumb(true),
 			Attributes.thumbTint(.darkGray),
@@ -90,8 +90,7 @@ class ViewController: UIViewController {
 			Attributes.thumbShadowRadius(0),
 			Attributes.thumbShadowDepth(0)
 			])
-		
+
 		knobView1.valueMaximum = progressView.valueMaximum
 	}
 }
-

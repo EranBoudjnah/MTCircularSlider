@@ -23,7 +23,7 @@
 import UIKit
 
 public enum MTCircularSliderError: Error {
-	case WindingsSetToPartialSlider
+	case windingsSetToPartialSlider
 }
 
 //
@@ -72,8 +72,9 @@ open class MTCircularSlider: UIControl {
 		didSet {
 			do {
 				try noWindingIfNotFullCircle()
-			} catch MTCircularSliderError.WindingsSetToPartialSlider {
-				print("Error: Cannot set maxWinds to values other than 1 if MTCircularSlider doesn't close a full circle. Try changing trackMinAngle or trackMaxAngle.")
+			} catch MTCircularSliderError.windingsSetToPartialSlider {
+				print("Error: Cannot set maxWinds to values other than 1 if MTCircularSlider doesn't close a full circle. " +
+                    "Try changing trackMinAngle or trackMaxAngle.")
 			} catch {
 				print("Error: Unknown error")
 			}
@@ -86,8 +87,9 @@ open class MTCircularSlider: UIControl {
 		didSet {
 			do {
 				try noWindingIfNotFullCircle()
-			} catch MTCircularSliderError.WindingsSetToPartialSlider {
-				print("Error: Cannot set maxWinds to values other than 1 if MTCircularSlider doesn't close a full circle. Try changing trackMinAngle or trackMaxAngle.")
+			} catch MTCircularSliderError.windingsSetToPartialSlider {
+				print("Error: Cannot set maxWinds to values other than 1 if MTCircularSlider doesn't close a full circle. " +
+                    "Try changing trackMinAngle or trackMaxAngle.")
 			} catch {
 				print("Error: Unknown error")
 			}
@@ -148,8 +150,9 @@ open class MTCircularSlider: UIControl {
 		didSet {
 			do {
 				try noWindingIfNotFullCircle()
-			} catch MTCircularSliderError.WindingsSetToPartialSlider {
-				print("Error: Cannot set maxWinds to values other than 1 if MTCircularSlider doesn't close a full circle. Try changing trackMinAngle or trackMaxAngle.")
+			} catch MTCircularSliderError.windingsSetToPartialSlider {
+				print("Error: Cannot set maxWinds to values other than 1 if MTCircularSlider doesn't close a full circle. " +
+                    "Try changing trackMinAngle or trackMaxAngle.")
 			} catch {
 				print("Error: Unknown error")
 			}
@@ -158,7 +161,8 @@ open class MTCircularSlider: UIControl {
 
 	fileprivate var isLeftToRight: Bool {
 		if #available(iOS 9.0, *) {
-			return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) == UIUserInterfaceLayoutDirection.leftToRight
+			return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) ==
+                UIUserInterfaceLayoutDirection.leftToRight
 		} else {
 			// Fallback on earlier versions
 			return true
@@ -267,7 +271,7 @@ open class MTCircularSlider: UIControl {
 
 			return arcPath
 		}
-		
+
 		/**
 		Clips the drawing to the MTCircularSlider track.
 		*/
@@ -520,14 +524,14 @@ open class MTCircularSlider: UIControl {
 	}
 
 	fileprivate func circlePath(withCenter center: CGPoint,
-															radius: CGFloat) -> UIBezierPath {
+                                radius: CGFloat) -> UIBezierPath {
 		return UIBezierPath(arcCenter: center,
 		                    radius: radius,
 		                    startAngle: 0,
 		                    endAngle: CGFloat(Double.pi * 2.0),
 		                    clockwise: true)
 	}
-	
+
 	// True if the provided location is on the thumb, false otherwise.
 	fileprivate func locationOnThumb(_ location: CGPoint) -> Bool {
 		let thumbCenter = self.thumbCenter
@@ -563,21 +567,21 @@ open class MTCircularSlider: UIControl {
 			vector2: CGPoint(x: to.x - from.x, y: to.y - from.y)
 		)
 
-		if (clockwise == isLeftToRight) {
-			while (angle < 0) { angle += 360 }
+		if clockwise == isLeftToRight {
+			while angle < 0 { angle += 360 }
 
 		} else {
-			while (angle > 0) { angle -= 360 }
+			while angle > 0 { angle -= 360 }
 		}
 
 		// Update our value by as much as the last motion defined.
 		pseudoValueForTouch += angle * angleToValue
 
 		// And make sure we don't count more than winds circles of overflow.
-		if (pseudoValueForTouch > valueMinimum + range * (maxWinds + 1)) {
+		if pseudoValueForTouch > valueMinimum + range * (maxWinds + 1) {
 			pseudoValueForTouch -= range
 		}
-		if (pseudoValueForTouch < valueMinimum - range) {
+		if pseudoValueForTouch < valueMinimum - range {
 			pseudoValueForTouch += range
 		}
 
@@ -592,18 +596,18 @@ open class MTCircularSlider: UIControl {
 		// Calculate the relative angle of the user's touch point starting from
 		// trackMinAngle.
 		var angle = (radiansToDegrees(atan2(point.x - bounds.midX, point.y - bounds.midY)) + trackMinAngle) + 180.0
-		if (!isLeftToRight) {
+		if !isLeftToRight {
 			angle = 360.0 - angle
 		}
 		angle = (90.0 - angle).truncatingRemainder(dividingBy: 360.0)
-		while (angle < 0.0) { angle += 360.0 }
+		while angle < 0.0 { angle += 360.0 }
 
 		return angle
 	}
 
 	fileprivate func noWindingIfNotFullCircle() throws {
 		guard maxWinds == 1 || trackMaxAngle - trackMinAngle == 360 else {
-			throw MTCircularSliderError.WindingsSetToPartialSlider
+			throw MTCircularSliderError.windingsSetToPartialSlider
 		}
 	}
 
