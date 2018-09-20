@@ -7,7 +7,7 @@
 
 ## Screenshot
 
-![Screenshot from Simulator](https://raw.githubusercontent.com/EranBoudjnah/MTCircularSlider/screenshots/screenshots/Simulator%20Screen%20Shot%202%20Jun%202016%2C%2013.35.42.png)
+![Screenshot from Simulator](https://raw.githubusercontent.com/EranBoudjnah/MTCircularSlider/screenshots/screenshots/Simulator%20Screen%20Shot%2016%20Sep%202018.gif)
 
 ## Usage
 
@@ -15,11 +15,11 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-- iOS 8.0+
+- iOS 10.0+
 
 ## Installation
 
-### CocoaPods (iOS 8.0+)
+### CocoaPods (iOS 10.0+)
 
 MTCircularSlider is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
