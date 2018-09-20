@@ -242,219 +242,22 @@ open class MTCircularSlider: UIControl {
 
 	override
 	open func draw(_ rect: CGRect) {
-		/**
-		Returns a UIBezierPath with the shape of a ring slice.
-	
-		- parameter arcCenter:   The center of the ring
-		- parameter innerRadius: The inner radius of the ring
-		- parameter outerRadius: The outer radius of the ring
-		- parameter startAngle:  The start angle of the ring slice
-		- parameter endAngle:    The end angle of the ring slice
-		
-		- returns: A UIBezierPath with the shape of a ring slice.
-		*/
-		func getArcPath(_ arcCenter: CGPoint, innerRadius: CGFloat,
-		                outerRadius: CGFloat, startAngle: CGFloat,
-		                endAngle: CGFloat) -> UIBezierPath {
-			let arcPath = UIBezierPath(arcCenter: arcCenter,
-			                           radius: outerRadius,
-			                           startAngle: startAngle,
-			                           endAngle: endAngle,
-			                           clockwise: true)
-
-			arcPath.addArc(withCenter: viewCenter,
-			               radius: innerRadius,
-			               startAngle: endAngle,
-			               endAngle: startAngle,
-			               clockwise: false)
-			arcPath.close()
-
-			return arcPath
-		}
-
-		/**
-		Clips the drawing to the MTCircularSlider track.
-		*/
-		func clipPath() {
-			let minAngle = degreesToRadians(trackMinAngle + 180.0)
-			let maxAngle = degreesToRadians(trackMaxAngle + 180.0)
-			let clipPath = getArcPath(viewCenter,
-			                          innerRadius: innerControlRadius,
-			                          outerRadius: outerControlRadius,
-			                          startAngle: minAngle,
-			                          endAngle: maxAngle)
-
-			clipPath.addClip()
-		}
-
-		/**
-		Fills the part of the track between the mininum angle and the thumb.
-		*/
-		func drawProgress() {
-			let minAngle = degreesToRadians(trackMinAngle + 180.0)
-
-			let progressPath =
-				isLeftToRight ?
-					getArcPath(viewCenter,
-					           innerRadius: innerControlRadius,
-					           outerRadius: outerControlRadius,
-					           startAngle: rtlAwareAngleRadians(minAngle),
-					           endAngle: rtlAwareAngleRadians(thumbAngle)) :
-					getArcPath(viewCenter,
-					           innerRadius: innerControlRadius,
-					           outerRadius: outerControlRadius,
-					           startAngle: rtlAwareAngleRadians(thumbAngle),
-					           endAngle: rtlAwareAngleRadians(minAngle))
-
-			minTrackTint.setFill()
-			progressPath.fill()
-		}
-
-		func setShadow(_ context: CGContext, depth: CGFloat, radius: CGFloat) {
-			context.clip(to: CGRect.infinite)
-			context.setShadow(offset: CGSize(width: 0, height: depth), blur: radius)
-		}
-
-		func drawTrack(_ context: CGContext) {
-			let trackPath = circlePath(withCenter: viewCenter,
-			                           radius: outerControlRadius)
-			maxTrackTint.setFill()
-			trackPath.fill()
-
-			if trackShadowDepth > 0 {
-				setShadow(context, depth: trackShadowDepth, radius: trackShadowRadius)
-			}
-
-			let trackShadowPath = UIBezierPath(rect: CGRect.infinite)
-
-			trackShadowPath.append(
-				circlePath(withCenter: viewCenter,
-				           radius: CGFloat(outerControlRadius + 0.5))
-			)
-
-			trackShadowPath.close()
-
-			trackShadowPath.append(
-				circlePath(withCenter: viewCenter,
-				           radius: CGFloat(innerControlRadius - 0.5))
-			)
-
-			trackShadowPath.usesEvenOddFillRule = true
-
-			UIColor.black.set()
-			trackShadowPath.fill()
-		}
-
-		func drawThumb() {
-			let thumbPath = circlePath(withCenter: thumbCenter,
-			                           radius: thumbRadius)
-
-			if hasThumb && thumbHasShadow() {
-				setupThumbLayer(thumbPath)
-				setupThumbLayerShadow(thumbPath)
-
-			} else {
-				resetThumbPaths()
-
-				if hasThumb {
-					thumbTint.setFill()
-					thumbPath.fill()
-				}
-			}
-
-			setThumbStroke()
-		}
-
-		func thumbHasShadow() -> Bool {
-			return thumbShadowDepth != 0 || thumbShadowRadius != 0
-		}
-
-		func setupThumbLayer(_ thumbPath: UIBezierPath) {
-			thumbLayer.path = thumbPath.cgPath
-			thumbLayer.fillColor = thumbTint.cgColor
-		}
-
-		func setupThumbLayerShadow(_ thumbPath: UIBezierPath) {
-			thumbLayer.shadowColor = UIColor.black.cgColor
-			thumbLayer.shadowPath = thumbPath.cgPath
-			thumbLayer.shadowOffset = CGSize(width: 0, height: thumbShadowDepth)
-			thumbLayer.shadowOpacity = 0.25
-			thumbLayer.shadowRadius = thumbShadowRadius
-		}
-
-		func resetThumbPaths() {
-			thumbLayer.path = nil
-			thumbLayer.shadowPath = nil
-		}
-
-		func setThumbStroke() {
-			thumbLayer.strokeColor = thumbBorderColor.cgColor
-			thumbLayer.lineWidth = thumbBorderWidth
-		}
-
 		let context = UIGraphicsGetCurrentContext()
-		context!.saveGState()
+		context?.saveGState()
 
-		clipPath()
+		clipDrawingPathToTrack()
 
 		drawTrack(context!)
 
-		context!.restoreGState()
+		context?.restoreGState()
 
-		drawProgress()
+		drawProgressOnTrack()
 
 		drawThumb()
 	}
 
 	fileprivate func rtlAwareAngleRadians(_ radians: CGFloat) -> CGFloat {
 		return isLeftToRight ? radians : CGFloat(Double.pi) - radians
-	}
-
-	override
-	open func beginTracking(_ touch: UITouch,
-	                        with event: UIEvent?) -> Bool {
-		if hasThumb {
-			let location = touch.location(in: self)
-
-			let pseudoValue = calculatePseudoValue(at: location)
-			// If the touch is on the thumb, start dragging from the thumb.
-			if locationOnThumb(location) {
-				lastPositionForTouch = location
-				pseudoValueForTouch = value
-				return true
-			}
-
-			// Check if the touch is out of our bounds.
-			if cappedValue(pseudoValue) != pseudoValue {
-				// Not on thumb or track, so abort gesture.
-				return false
-			}
-
-			if value > valueMaximum {
-				// More than one winding, multiple possible values. Abort.
-				return false
-			}
-			value = pseudoValue
-			lastPositionForTouch = location
-		}
-
-		return super.beginTracking(touch, with: event)
-	}
-
-	override
-	open func continueTracking(_ touch: UITouch,
-	                           with event: UIEvent?) -> Bool {
-		if !hasThumb {
-			return super.continueTracking(touch, with: event)
-		}
-
-		let location = touch.location(in: self)
-
-		value = calculatePseudoValue(lastPositionForTouch, to: location)
-
-		lastPositionForTouch = location
-
-		return true
 	}
 
 	// Iterate over the provided attributes and set the corresponding values.
@@ -523,15 +326,6 @@ open class MTCircularSlider: UIControl {
 		return min(max(valueMinimum, value), valueMaximum + valueRange() * (maxWinds - 1.0))
 	}
 
-	fileprivate func circlePath(withCenter center: CGPoint,
-                                radius: CGFloat) -> UIBezierPath {
-		return UIBezierPath(arcCenter: center,
-		                    radius: radius,
-		                    startAngle: 0,
-		                    endAngle: CGFloat(Double.pi * 2.0),
-		                    clockwise: true)
-	}
-
 	// True if the provided location is on the thumb, false otherwise.
 	fileprivate func locationOnThumb(_ location: CGPoint) -> Bool {
 		let thumbCenter = self.thumbCenter
@@ -539,70 +333,8 @@ open class MTCircularSlider: UIControl {
 			pow(location.y - thumbCenter.y, 2)) <= thumbRadius
 	}
 
-	@discardableResult
-	fileprivate func calculatePseudoValue(at point: CGPoint) -> CGFloat {
-		let angle = angleAt(point)
-		let range = valueRange()
-		let windings = value == valueMinimum ? 1 :
-			ceil((value - valueMinimum) / range)
-
-		// Normalize the angle, then convert to value scale.
-		let angleRange = trackMaxAngle - trackMinAngle
-		let targetValue =
-			(angle / angleRange + windings - 1.0) * range + valueMinimum
-
-		pseudoValueForTouch = targetValue
-
-		return targetValue
-	}
-
-	fileprivate func calculatePseudoValue(_ from: CGPoint, to: CGPoint) -> CGFloat {
-		let angle1 = angleAt(from)
-		let angle2 = angleAt(to)
-		var angle = angle2 - angle1
-		let range = valueRange()
-		let angleToValue = range / (trackMaxAngle - trackMinAngle)
-		let clockwise = isClockwise(
-			CGPoint(x: from.x - bounds.midX, y: from.y - bounds.midY),
-			vector2: CGPoint(x: to.x - from.x, y: to.y - from.y)
-		)
-
-		if clockwise == isLeftToRight {
-			while angle < 0 { angle += 360 }
-
-		} else {
-			while angle > 0 { angle -= 360 }
-		}
-
-		// Update our value by as much as the last motion defined.
-		pseudoValueForTouch += angle * angleToValue
-
-		// And make sure we don't count more than winds circles of overflow.
-		if pseudoValueForTouch > valueMinimum + range * (maxWinds + 1) {
-			pseudoValueForTouch -= range
-		}
-		if pseudoValueForTouch < valueMinimum - range {
-			pseudoValueForTouch += range
-		}
-
-		return pseudoValueForTouch
-	}
-
 	fileprivate func isClockwise(_ vector1: CGPoint, vector2: CGPoint) -> Bool {
 		return vector1.y * vector2.x < vector1.x * vector2.y
-	}
-
-	fileprivate func angleAt(_ point: CGPoint) -> CGFloat {
-		// Calculate the relative angle of the user's touch point starting from
-		// trackMinAngle.
-		var angle = (radiansToDegrees(atan2(point.x - bounds.midX, point.y - bounds.midY)) + trackMinAngle) + 180.0
-		if !isLeftToRight {
-			angle = 360.0 - angle
-		}
-		angle = (90.0 - angle).truncatingRemainder(dividingBy: 360.0)
-		while angle < 0.0 { angle += 360.0 }
-
-		return angle
 	}
 
 	fileprivate func noWindingIfNotFullCircle() throws {
@@ -614,12 +346,267 @@ open class MTCircularSlider: UIControl {
 	fileprivate func valueRange() -> CGFloat {
 		return valueMaximum - valueMinimum
 	}
+}
 
-	fileprivate func radiansToDegrees(_ angle: CGFloat) -> CGFloat {
-		return angle / CGFloat(Double.pi) * 180.0
-	}
+extension MTCircularSlider {
+    fileprivate func radiansToDegrees(_ angle: CGFloat) -> CGFloat {
+        return angle / CGFloat(Double.pi) * 180.0
+    }
 
-	fileprivate func degreesToRadians(_ angle: CGFloat) -> CGFloat {
-		return angle / 180.0 * CGFloat(Double.pi)
-	}
+    fileprivate func degreesToRadians(_ angle: CGFloat) -> CGFloat {
+        return angle / 180.0 * CGFloat(Double.pi)
+    }
+}
+
+extension MTCircularSlider {
+    override
+    open func beginTracking(_ touch: UITouch,
+                            with event: UIEvent?) -> Bool {
+        if hasThumb {
+            let location = touch.location(in: self)
+
+            let pseudoValue = calculatePseudoValue(at: location)
+            // If the touch is on the thumb, start dragging from the thumb.
+            if locationOnThumb(location) {
+                lastPositionForTouch = location
+                pseudoValueForTouch = value
+                return true
+            }
+
+            // Check if the touch is out of our bounds.
+            if cappedValue(pseudoValue) != pseudoValue {
+                // Not on thumb or track, so abort gesture.
+                return false
+            }
+
+            if value > valueMaximum {
+                // More than one winding, multiple possible values. Abort.
+                return false
+            }
+            value = pseudoValue
+            lastPositionForTouch = location
+        }
+
+        return super.beginTracking(touch, with: event)
+    }
+
+    override
+    open func continueTracking(_ touch: UITouch,
+                               with event: UIEvent?) -> Bool {
+        if !hasThumb {
+            return super.continueTracking(touch, with: event)
+        }
+
+        let location = touch.location(in: self)
+
+        value = calculatePseudoValue(fromPoint: lastPositionForTouch, toPoint: location)
+
+        lastPositionForTouch = location
+
+        return true
+    }
+
+    @discardableResult
+    fileprivate func calculatePseudoValue(at point: CGPoint) -> CGFloat {
+        let angle = angleAt(point)
+        let range = valueRange()
+        let windings = value == valueMinimum ? 1 :
+            ceil((value - valueMinimum) / range)
+
+        // Normalize the angle, then convert to value scale.
+        let angleRange = trackMaxAngle - trackMinAngle
+        let targetValue =
+            (angle / angleRange + windings - 1.0) * range + valueMinimum
+
+        pseudoValueForTouch = targetValue
+
+        return targetValue
+    }
+
+    fileprivate func calculatePseudoValue(fromPoint: CGPoint, toPoint: CGPoint) -> CGFloat {
+        let angle1 = angleAt(fromPoint)
+        let angle2 = angleAt(toPoint)
+        var angle = angle2 - angle1
+        let range = valueRange()
+        let angleToValue = range / (trackMaxAngle - trackMinAngle)
+        let clockwise = isClockwise(
+            CGPoint(x: fromPoint.x - bounds.midX, y: fromPoint.y - bounds.midY),
+            vector2: CGPoint(x: toPoint.x - fromPoint.x, y: toPoint.y - fromPoint.y)
+        )
+
+        if clockwise == isLeftToRight {
+            while angle < 0 { angle += 360 }
+
+        } else {
+            while angle > 0 { angle -= 360 }
+        }
+
+        // Update our value by as much as the last motion defined.
+        pseudoValueForTouch += angle * angleToValue
+
+        // And make sure we don't count more than winds circles of overflow.
+        if pseudoValueForTouch > valueMinimum + range * (maxWinds + 1) {
+            pseudoValueForTouch -= range
+        }
+        if pseudoValueForTouch < valueMinimum - range {
+            pseudoValueForTouch += range
+        }
+
+        return pseudoValueForTouch
+    }
+
+    fileprivate func angleAt(_ point: CGPoint) -> CGFloat {
+        // Calculate the relative angle of the user's touch point starting from
+        // trackMinAngle.
+        var angle = (radiansToDegrees(atan2(point.x - bounds.midX, point.y - bounds.midY)) + trackMinAngle) + 180.0
+        if !isLeftToRight {
+            angle = 360.0 - angle
+        }
+        angle = (90.0 - angle).truncatingRemainder(dividingBy: 360.0)
+        while angle < 0.0 { angle += 360.0 }
+
+        return angle
+    }
+}
+
+extension MTCircularSlider {
+    func clipDrawingPathToTrack() {
+        let minAngle = degreesToRadians(trackMinAngle + 180.0)
+        let maxAngle = degreesToRadians(trackMaxAngle + 180.0)
+        let clipPath = getRingSliceArcPath(ringCenter: viewCenter,
+                                           innerRadius: innerControlRadius, outerRadius: outerControlRadius,
+                                           startAngle: minAngle, endAngle: maxAngle)
+
+        clipPath.addClip()
+    }
+
+    func drawProgressOnTrack() {
+        let minAngle = degreesToRadians(trackMinAngle + 180.0)
+
+        let progressPath =
+            isLeftToRight ?
+                getRingSliceArcPath(ringCenter: viewCenter,
+                                    innerRadius: innerControlRadius,
+                                    outerRadius: outerControlRadius,
+                                    startAngle: rtlAwareAngleRadians(minAngle),
+                                    endAngle: rtlAwareAngleRadians(thumbAngle)) :
+                getRingSliceArcPath(ringCenter: viewCenter,
+                                    innerRadius: innerControlRadius,
+                                    outerRadius: outerControlRadius,
+                                    startAngle: rtlAwareAngleRadians(thumbAngle),
+                                    endAngle: rtlAwareAngleRadians(minAngle))
+
+        minTrackTint.setFill()
+        progressPath.fill()
+    }
+
+    func drawTrack(_ context: CGContext) {
+        let trackPath = getCirclePath(withCenter: viewCenter,
+                                   radius: outerControlRadius)
+        maxTrackTint.setFill()
+        trackPath.fill()
+
+        if trackShadowDepth > 0 {
+            setShadow(context, depth: trackShadowDepth, radius: trackShadowRadius)
+        }
+
+        let trackShadowPath = UIBezierPath(rect: CGRect.infinite)
+
+        trackShadowPath.append(
+            getCirclePath(withCenter: viewCenter,
+                       radius: CGFloat(outerControlRadius + 0.5))
+        )
+
+        trackShadowPath.close()
+
+        trackShadowPath.append(
+            getCirclePath(withCenter: viewCenter,
+                       radius: CGFloat(innerControlRadius - 0.5))
+        )
+
+        trackShadowPath.usesEvenOddFillRule = true
+
+        UIColor.black.set()
+        trackShadowPath.fill()
+    }
+
+    func drawThumb() {
+        let thumbPath = getCirclePath(withCenter: thumbCenter,
+                                      radius: thumbRadius)
+
+        if hasThumb && thumbHasShadow() {
+            setThumbLayerPathAndColor(thumbPath)
+            setupThumbLayerShadow(thumbPath)
+
+        } else {
+            resetThumbPaths()
+
+            if hasThumb {
+                thumbTint.setFill()
+                thumbPath.fill()
+            }
+        }
+
+        setThumbStroke()
+    }
+
+    fileprivate func getCirclePath(withCenter center: CGPoint,
+                                   radius: CGFloat) -> UIBezierPath {
+        return UIBezierPath(arcCenter: center,
+                            radius: radius,
+                            startAngle: 0,
+                            endAngle: CGFloat(Double.pi * 2.0),
+                            clockwise: true)
+    }
+
+    private func getRingSliceArcPath(ringCenter: CGPoint,
+                                     innerRadius: CGFloat, outerRadius: CGFloat,
+                                     startAngle: CGFloat, endAngle: CGFloat) -> UIBezierPath {
+        let arcPath = UIBezierPath(arcCenter: ringCenter,
+                                   radius: outerRadius,
+                                   startAngle: startAngle,
+                                   endAngle: endAngle,
+                                   clockwise: true)
+
+        arcPath.addArc(withCenter: viewCenter,
+                       radius: innerRadius,
+                       startAngle: endAngle,
+                       endAngle: startAngle,
+                       clockwise: false)
+        arcPath.close()
+
+        return arcPath
+    }
+
+    private func setShadow(_ context: CGContext, depth: CGFloat, radius: CGFloat) {
+        context.clip(to: CGRect.infinite)
+        context.setShadow(offset: CGSize(width: 0, height: depth), blur: radius)
+    }
+
+    private func thumbHasShadow() -> Bool {
+        return thumbShadowDepth != 0 || thumbShadowRadius != 0
+    }
+
+    private func setThumbLayerPathAndColor(_ thumbPath: UIBezierPath) {
+        thumbLayer.path = thumbPath.cgPath
+        thumbLayer.fillColor = thumbTint.cgColor
+    }
+
+    private func setupThumbLayerShadow(_ thumbPath: UIBezierPath) {
+        thumbLayer.shadowColor = UIColor.black.cgColor
+        thumbLayer.shadowPath = thumbPath.cgPath
+        thumbLayer.shadowOffset = CGSize(width: 0, height: thumbShadowDepth)
+        thumbLayer.shadowOpacity = 0.25
+        thumbLayer.shadowRadius = thumbShadowRadius
+    }
+
+    private func resetThumbPaths() {
+        thumbLayer.path = nil
+        thumbLayer.shadowPath = nil
+    }
+
+    private func setThumbStroke() {
+        thumbLayer.strokeColor = thumbBorderColor.cgColor
+        thumbLayer.lineWidth = thumbBorderWidth
+    }
 }
