@@ -260,8 +260,8 @@ open class MTCircularSlider: UIControl {
 		return isLeftToRight ? radians : CGFloat(Double.pi) - radians
 	}
 
-	// Iterate over the provided attributes and set the corresponding values.
-	open func configure(_ attributes: [Attributes]) {
+	// swiftlint:disable cyclomatic_complexity
+	open func applyAttributes(_ attributes: [Attributes]) {
 		for attribute in attributes {
 			switch attribute {
 			/* Track */
@@ -302,6 +302,7 @@ open class MTCircularSlider: UIControl {
 
 		setNeedsDisplay()
 	}
+	// swiftlint:enable cyclomatic_complexity
 
 	/**
 	Returns the current angle of the thumb in radians.
@@ -609,4 +610,5 @@ extension MTCircularSlider {
         thumbLayer.strokeColor = thumbBorderColor.cgColor
         thumbLayer.lineWidth = thumbBorderWidth
     }
+    // swiftlint:disable file_length
 }

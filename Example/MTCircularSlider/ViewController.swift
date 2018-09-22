@@ -57,7 +57,7 @@ class ViewController: UIViewController {
 	}
 
 	fileprivate func initCustomKnobs() {
-		knobView1.configure([
+		knobView1.applyAttributes([
 			/* Track */
 			Attributes.minTrackTint(.lightGray),
 			Attributes.maxTrackTint(.darkGray),
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
 
 		knobView1.valueMaximum = progressView.valueMaximum
 
-		knobView2.configure([
+		knobView2.applyAttributes([
 			/* Track */
 			Attributes.minTrackTint(.lightGray),
 			Attributes.maxTrackTint(.lightGray),

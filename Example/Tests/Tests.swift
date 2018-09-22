@@ -84,7 +84,7 @@ class Tests: XCTestCase {
 			Attributes.thumbShadowDepth(4)
 		]
 
-		slider.configure(newAttributes)
+		slider.applyAttributes(newAttributes)
 
 		/* Track */
 		XCTAssertEqual(slider.minTrackTint, UIColor.black)
