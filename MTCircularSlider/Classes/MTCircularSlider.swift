@@ -26,11 +26,9 @@ public enum MTCircularSliderError: Error {
 	case windingsSetToPartialSlider
 }
 
-//
-// Attributes for configuring a MTKnobView.
-//
+// MARK: - Attributes for configuring a MTKnobView.
 public enum Attributes {
-	/* Track */
+	// MARK: Track style
 	case minTrackTint(UIColor)
 	case maxTrackTint(UIColor)
 	case trackWidth(CGFloat)
@@ -40,7 +38,7 @@ public enum Attributes {
 	case trackMaxAngle(CGFloat)
 	case maxWinds(CGFloat)
 
-	/* Thumb */
+	// MARK: Thumb style
 	case hasThumb(Bool)
 	case thumbTint(UIColor)
 	case thumbRadius(CGFloat)
@@ -53,10 +51,10 @@ public enum Attributes {
 @IBDesignable
 open class MTCircularSlider: UIControl {
 	@IBInspectable
-	var minTrackTint: UIColor = UIColor(red: 0.0, green: 0.478, blue: 1.0, alpha: 1.0)
+	var minTrackTint = UIColor(red: 0.0, green: 0.478, blue: 1.0, alpha: 1.0)
 
 	@IBInspectable
-	var maxTrackTint: UIColor = UIColor(red: 0.71, green: 0.71, blue: 0.71, alpha: 1.0)
+	var maxTrackTint = UIColor(red: 0.71, green: 0.71, blue: 0.71, alpha: 1.0)
 
 	@IBInspectable
 	var trackWidth: CGFloat = 2.0 { didSet { setNeedsDisplay() } }
@@ -98,10 +96,10 @@ open class MTCircularSlider: UIControl {
 	}
 
 	@IBInspectable
-	var hasThumb: Bool = true { didSet { setNeedsDisplay() } }
+	var hasThumb = true { didSet { setNeedsDisplay() } }
 
 	@IBInspectable
-	var thumbTint: UIColor = UIColor.white
+	var thumbTint = UIColor.white
 
 	@IBInspectable
 	var thumbRadius: CGFloat = 14 { didSet { setNeedsDisplay() } }
@@ -116,7 +114,7 @@ open class MTCircularSlider: UIControl {
 	var thumbBorderWidth: CGFloat = 0 { didSet { setNeedsDisplay() } }
 
 	@IBInspectable
-	var thumbBorderColor: UIColor = UIColor.lightGray
+	var thumbBorderColor = UIColor.lightGray
 
 	@IBInspectable
 	open var value: CGFloat = 0.5 {
@@ -209,7 +207,7 @@ open class MTCircularSlider: UIControl {
 		return CGFloat(radians)
 	}
 
-	fileprivate var lastPositionForTouch: CGPoint = CGPoint.zero
+	fileprivate var lastPositionForTouch = CGPoint.zero
 
 	fileprivate var pseudoValueForTouch: CGFloat = 0.0
 
@@ -264,7 +262,7 @@ open class MTCircularSlider: UIControl {
 	open func applyAttributes(_ attributes: [Attributes]) {
 		for attribute in attributes {
 			switch attribute {
-			/* Track */
+			// MARK: Track style
 			case let .minTrackTint(value):
 				self.minTrackTint = value
 			case let .maxTrackTint(value):
@@ -282,7 +280,7 @@ open class MTCircularSlider: UIControl {
 			case let .maxWinds(value):
 				self.maxWinds = value
 
-			/* Thumb */
+			// MARK: Thumb style
 			case let .hasThumb(value):
 				self.hasThumb = value
 			case let .thumbTint(value):
@@ -349,16 +347,18 @@ open class MTCircularSlider: UIControl {
 	}
 }
 
-extension MTCircularSlider {
-    fileprivate func radiansToDegrees(_ angle: CGFloat) -> CGFloat {
+// MARK: - Trigonometry converters
+fileprivate extension MTCircularSlider {
+    func radiansToDegrees(_ angle: CGFloat) -> CGFloat {
         return angle / CGFloat(Double.pi) * 180.0
     }
 
-    fileprivate func degreesToRadians(_ angle: CGFloat) -> CGFloat {
+    func degreesToRadians(_ angle: CGFloat) -> CGFloat {
         return angle / 180.0 * CGFloat(Double.pi)
     }
 }
 
+// MARK: - Touch behaviour
 extension MTCircularSlider {
     override
     open func beginTracking(_ touch: UITouch,
@@ -470,7 +470,8 @@ extension MTCircularSlider {
     }
 }
 
-extension MTCircularSlider {
+// MARK: - MTCircularSlider Drawing
+fileprivate extension MTCircularSlider {
     func clipDrawingPathToTrack() {
         let minAngle = degreesToRadians(trackMinAngle + 180.0)
         let maxAngle = degreesToRadians(trackMaxAngle + 180.0)
@@ -551,8 +552,8 @@ extension MTCircularSlider {
         setThumbStroke()
     }
 
-    fileprivate func getCirclePath(withCenter center: CGPoint,
-                                   radius: CGFloat) -> UIBezierPath {
+    func getCirclePath(withCenter center: CGPoint,
+                       radius: CGFloat) -> UIBezierPath {
         return UIBezierPath(arcCenter: center,
                             radius: radius,
                             startAngle: 0,
