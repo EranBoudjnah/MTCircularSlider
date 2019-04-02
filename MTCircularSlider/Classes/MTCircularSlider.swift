@@ -51,10 +51,10 @@ public enum Attributes {
 @IBDesignable
 open class MTCircularSlider: UIControl {
 	@IBInspectable
-	var minTrackTint = UIColor(red: 0.0, green: 0.478, blue: 1.0, alpha: 1.0)
+	var minTrackTint: UIColor = UIColor(red: 0.0, green: 0.478, blue: 1.0, alpha: 1.0)
 
 	@IBInspectable
-	var maxTrackTint = UIColor(red: 0.71, green: 0.71, blue: 0.71, alpha: 1.0)
+	var maxTrackTint: UIColor = UIColor(red: 0.71, green: 0.71, blue: 0.71, alpha: 1.0)
 
 	@IBInspectable
 	var trackWidth: CGFloat = 2.0 { didSet { setNeedsDisplay() } }
@@ -96,10 +96,10 @@ open class MTCircularSlider: UIControl {
 	}
 
 	@IBInspectable
-	var hasThumb = true { didSet { setNeedsDisplay() } }
+	var hasThumb: Bool = true { didSet { setNeedsDisplay() } }
 
 	@IBInspectable
-	var thumbTint = UIColor.white
+	var thumbTint: UIColor = UIColor.white
 
 	@IBInspectable
 	var thumbRadius: CGFloat = 14 { didSet { setNeedsDisplay() } }
@@ -114,7 +114,7 @@ open class MTCircularSlider: UIControl {
 	var thumbBorderWidth: CGFloat = 0 { didSet { setNeedsDisplay() } }
 
 	@IBInspectable
-	var thumbBorderColor = UIColor.lightGray
+	var thumbBorderColor: UIColor = UIColor.lightGray
 
 	@IBInspectable
 	open var value: CGFloat = 0.5 {
