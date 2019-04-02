@@ -12,7 +12,7 @@ before_install:
 install:
 - ./install_swiftlint.sh
 script:
-- set -o pipefail && xcodebuild test -workspace Example/MTCircularSlider.xcworkspace -scheme MTCircularSlider-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination "platform=iOS Simulator,OS=11.1,name=iPhone 8" | xcpretty
+- set -o pipefail && xcodebuild test -workspace Example/MTCircularSlider.xcworkspace -scheme MTCircularSlider-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination "platform=iOS Simulator,OS=12.2,name=iPhone 8" | xcpretty
 - pod lib lint --allow-warnings
 - swiftlint
 
