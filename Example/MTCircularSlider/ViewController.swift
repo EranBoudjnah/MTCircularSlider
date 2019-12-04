@@ -92,5 +92,7 @@ class ViewController: UIViewController {
 			])
 
 		knobView1.valueMaximum = progressView.valueMaximum
-	}
+
+//        knobWithLabelView.addedTouchArea = 50 // any value you want
+    }
 }

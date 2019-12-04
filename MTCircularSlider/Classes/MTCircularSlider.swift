@@ -46,6 +46,9 @@ public enum Attributes {
 	case thumbShadowDepth(CGFloat)
 	case thumbBorderWidth(CGFloat)
 	case thumbBorderColor(UIColor)
+
+    // MARK: View properties
+    case touchPadding(CGFloat)
 }
 
 @IBDesignable
@@ -157,6 +160,9 @@ open class MTCircularSlider: UIControl {
 		}
 	}
 
+    @IBInspectable
+    open var touchPadding: CGFloat = 0.0
+    
 	fileprivate var isLeftToRight: Bool {
 		if #available(iOS 9.0, *) {
 			return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) ==
@@ -254,6 +260,17 @@ open class MTCircularSlider: UIControl {
 		drawThumb()
 	}
 
+    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if (!isUserInteractionEnabled || isHidden) {
+            return nil;
+        }
+        let touchRect = bounds.insetBy(dx: -touchPadding, dy: -touchPadding)
+        if (touchRect.contains(point)) {
+            return self;
+        }
+        return nil;
+    }
+
 	fileprivate func rtlAwareAngleRadians(_ radians: CGFloat) -> CGFloat {
 		return isLeftToRight ? radians : CGFloat(Double.pi) - radians
 	}
@@ -295,7 +312,11 @@ open class MTCircularSlider: UIControl {
 				self.thumbBorderWidth = value
 			case let .thumbBorderColor(value):
 				self.thumbBorderColor = value
-			}
+
+            // MARK: View properties
+            case let .touchPadding(value):
+                self.touchPadding = value
+            }
 		}
 
 		setNeedsDisplay()
