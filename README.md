@@ -2,8 +2,8 @@
 
 [![CI Status](http://img.shields.io/travis/EranBoudjnah/MTCircularSlider.svg?style=flat)](https://travis-ci.org/EranBoudjnah/MTCircularSlider)
 [![Version](https://img.shields.io/cocoapods/v/MTCircularSlider.svg?style=flat)](http://cocoapods.org/pods/MTCircularSlider)
-[![License](https://img.shields.io/cocoapods/l/MTCircularSlider.svg?style=flat)](http://cocoapods.org/pods/MTCircularSlider)
-[![Platform](https://img.shields.io/cocoapods/p/MTCircularSlider.svg?style=flat)](http://cocoapods.org/pods/MTCircularSlider)
+[![License](https://img.shields.io/cocoapods/l/MTCircularSlider.svg?style=flat)](https://github.com/EranBoudjnah/MTCircularSlider/blob/master/LICENSE)
+[![Platform](https://img.shields.io/cocoapods/p/MTCircularSlider.svg?style=flat)](https://developer.apple.com/swift/resources/)
 
 ## Screenshot
 
