@@ -36,6 +36,7 @@ public enum Attributes {
 	case trackShadowDepth(CGFloat)
 	case trackMinAngle(CGFloat)
 	case trackMaxAngle(CGFloat)
+    case trackRounding(Bool)
 	case maxWinds(CGFloat)
 
 	// MARK: Thumb style
@@ -97,7 +98,10 @@ open class MTCircularSlider: UIControl {
 			setNeedsDisplay()
 		}
 	}
-
+    
+    @IBInspectable
+    var trackRounding: Bool = false { didSet { setNeedsDisplay() } }
+    
 	@IBInspectable
 	var hasThumb: Bool = true { didSet { setNeedsDisplay() } }
 
@@ -294,6 +298,8 @@ open class MTCircularSlider: UIControl {
 				self.trackMinAngle = value
 			case let .trackMaxAngle(value):
 				self.trackMaxAngle = value
+            case let .trackRounding(value):
+                self.trackRounding = value
 			case let .maxWinds(value):
 				self.maxWinds = value
 
@@ -498,13 +504,15 @@ fileprivate extension MTCircularSlider {
         let maxAngle = degreesToRadians(trackMaxAngle + 180.0)
         let clipPath = getRingSliceArcPath(ringCenter: viewCenter,
                                            innerRadius: innerControlRadius, outerRadius: outerControlRadius,
-                                           startAngle: minAngle, endAngle: maxAngle)
+                                           startAngle: minAngle, endAngle: maxAngle,
+                                           isRounded: self.trackRounding)
 
         clipPath.addClip()
     }
 
     func drawProgressOnTrack() {
         let minAngle = degreesToRadians(trackMinAngle + 180.0)
+        let isRounded = self.value != 0 && self.trackRounding
 
         let progressPath =
             isLeftToRight ?
@@ -512,12 +520,14 @@ fileprivate extension MTCircularSlider {
                                     innerRadius: innerControlRadius,
                                     outerRadius: outerControlRadius,
                                     startAngle: rtlAwareAngleRadians(minAngle),
-                                    endAngle: rtlAwareAngleRadians(thumbAngle)) :
+                                    endAngle: rtlAwareAngleRadians(thumbAngle),
+                                    isRounded: isRounded) :
                 getRingSliceArcPath(ringCenter: viewCenter,
                                     innerRadius: innerControlRadius,
                                     outerRadius: outerControlRadius,
                                     startAngle: rtlAwareAngleRadians(thumbAngle),
-                                    endAngle: rtlAwareAngleRadians(minAngle))
+                                    endAngle: rtlAwareAngleRadians(minAngle),
+                                    isRounded: isRounded)
 
         minTrackTint.setFill()
         progressPath.fill()
@@ -584,23 +594,75 @@ fileprivate extension MTCircularSlider {
 
     private func getRingSliceArcPath(ringCenter: CGPoint,
                                      innerRadius: CGFloat, outerRadius: CGFloat,
-                                     startAngle: CGFloat, endAngle: CGFloat) -> UIBezierPath {
+                                     startAngle: CGFloat, endAngle: CGFloat,
+                                     isRounded: Bool) -> UIBezierPath {
         let arcPath = UIBezierPath(arcCenter: ringCenter,
                                    radius: outerRadius,
                                    startAngle: startAngle,
                                    endAngle: endAngle,
                                    clockwise: true)
-
+        let radius = (outerRadius - innerRadius) / 2
+        
+        let centerPoint = {
+            self.centerPointFrom(
+                innerRadius: innerRadius,
+                outerRadius: outerRadius,
+                angle: $0,
+                ringCenter: ringCenter
+            )
+        }
+        
+        let arcProccessor = {
+            arcPath.addArc(withCenter: $0, radius: radius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+        }
+        
+        if isRounded {
+            let endCenter = centerPoint(endAngle)
+            arcProccessor(endCenter)
+        }
+        
         arcPath.addArc(withCenter: viewCenter,
                        radius: innerRadius,
                        startAngle: endAngle,
                        endAngle: startAngle,
                        clockwise: false)
+        
+        if isRounded {
+            let startCenter = centerPoint(startAngle)
+            arcProccessor(startCenter)
+        }
+        
         arcPath.close()
 
         return arcPath
     }
-
+    
+    private func centerPointFrom(innerRadius: CGFloat, outerRadius: CGFloat,
+                                 angle: CGFloat, ringCenter: CGPoint) -> CGPoint {
+        let outStartCenter = pointOnCircle(
+            radius: outerRadius,
+            angle: angle,
+            center: ringCenter
+        )
+        
+        let inStartCenter = pointOnCircle(
+            radius: innerRadius,
+            angle: angle,
+            center: ringCenter
+        )
+        
+        return CGPoint(
+            x: (outStartCenter.x + inStartCenter.x) / 2,
+            y: (outStartCenter.y + inStartCenter.y) / 2
+        )
+    }
+    
+    private func pointOnCircle(radius: CGFloat, angle: CGFloat, center: CGPoint) -> CGPoint {
+        let calculate: ((CGFloat) -> CGFloat) -> CGFloat = { (radius) * $0(angle) }
+        let point = CGPoint(x: calculate(cos), y: calculate(sin))
+        
+        return CGPoint(x: center.x + point.x, y: center.y + point.y)
+    }
     private func setShadow(_ context: CGContext, depth: CGFloat, radius: CGFloat) {
         context.clip(to: CGRect.infinite)
         context.setShadow(offset: CGSize(width: 0, height: depth), blur: radius)
