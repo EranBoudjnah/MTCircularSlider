@@ -159,7 +159,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="touchPadding">
                                         <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="trackRounding" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="areTrackCapsRound" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
