@@ -36,7 +36,7 @@ public enum Attributes {
 	case trackShadowDepth(CGFloat)
 	case trackMinAngle(CGFloat)
 	case trackMaxAngle(CGFloat)
-    case trackRounding(Bool)
+    case areTrackCapsRound(Bool)
 	case maxWinds(CGFloat)
 
 	// MARK: Thumb style
@@ -100,7 +100,7 @@ open class MTCircularSlider: UIControl {
 	}
     
     @IBInspectable
-    var trackRounding: Bool = false { didSet { setNeedsDisplay() } }
+    var areTrackCapsRound: Bool = false { didSet { setNeedsDisplay() } }
     
 	@IBInspectable
 	var hasThumb: Bool = true { didSet { setNeedsDisplay() } }
@@ -298,8 +298,8 @@ open class MTCircularSlider: UIControl {
 				self.trackMinAngle = value
 			case let .trackMaxAngle(value):
 				self.trackMaxAngle = value
-            case let .trackRounding(value):
-                self.trackRounding = value
+            case let .areTrackCapsRound(value):
+                self.areTrackCapsRound = value
 			case let .maxWinds(value):
 				self.maxWinds = value
 
@@ -505,14 +505,14 @@ fileprivate extension MTCircularSlider {
         let clipPath = getRingSliceArcPath(ringCenter: viewCenter,
                                            innerRadius: innerControlRadius, outerRadius: outerControlRadius,
                                            startAngle: minAngle, endAngle: maxAngle,
-                                           isRounded: self.trackRounding)
+                                           isRounded: self.areTrackCapsRound)
 
         clipPath.addClip()
     }
 
     func drawProgressOnTrack() {
         let minAngle = degreesToRadians(trackMinAngle + 180.0)
-        let isRounded = self.value != 0 && self.trackRounding
+        let isRounded = self.value != 0 && self.areTrackCapsRound
 
         let progressPath =
             isLeftToRight ?
@@ -601,10 +601,10 @@ fileprivate extension MTCircularSlider {
                                    startAngle: startAngle,
                                    endAngle: endAngle,
                                    clockwise: true)
-        let radius = (outerRadius - innerRadius) / 2
+        let ringWidthRadius = (outerRadius - innerRadius) / 2
         
-        let centerPoint = {
-            self.centerPointFrom(
+        let ringEdgeCenterPoint = {
+            self.edgeCenterPointFrom(
                 innerRadius: innerRadius,
                 outerRadius: outerRadius,
                 angle: $0,
@@ -612,13 +612,13 @@ fileprivate extension MTCircularSlider {
             )
         }
         
-        let arcProccessor = {
-            arcPath.addArc(withCenter: $0, radius: radius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+        let addRoundEdge = {
+            arcPath.addArc(withCenter: $0, radius: ringWidthRadius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
         }
         
         if isRounded {
-            let endCenter = centerPoint(endAngle)
-            arcProccessor(endCenter)
+            let endCenter = ringEdgeCenterPoint(endAngle)
+            addRoundEdge(endCenter)
         }
         
         arcPath.addArc(withCenter: viewCenter,
@@ -628,8 +628,8 @@ fileprivate extension MTCircularSlider {
                        clockwise: false)
         
         if isRounded {
-            let startCenter = centerPoint(startAngle)
-            arcProccessor(startCenter)
+            let startCenter = ringEdgeCenterPoint(startAngle)
+            addRoundEdge(startCenter)
         }
         
         arcPath.close()
@@ -637,8 +637,8 @@ fileprivate extension MTCircularSlider {
         return arcPath
     }
     
-    private func centerPointFrom(innerRadius: CGFloat, outerRadius: CGFloat,
-                                 angle: CGFloat, ringCenter: CGPoint) -> CGPoint {
+    private func edgeCenterPointFrom(innerRadius: CGFloat, outerRadius: CGFloat,
+                                     angle: CGFloat, ringCenter: CGPoint) -> CGPoint {
         let outStartCenter = pointOnCircle(
             radius: outerRadius,
             angle: angle,

@@ -58,7 +58,7 @@ class Tests: XCTestCase {
 		XCTAssertEqual(slider.trackShadowDepth, 0)
 		XCTAssertEqual(slider.trackMinAngle, 0)
 		XCTAssertEqual(slider.trackMaxAngle, 360)
-        XCTAssertEqual(slider.trackRounding, false)
+        XCTAssertEqual(slider.areTrackCapsRound, false)
 
 		/* Thumb */
 		XCTAssertEqual(slider.hasThumb, true)
@@ -76,7 +76,7 @@ class Tests: XCTestCase {
 			Attributes.trackShadowDepth(4),
 			Attributes.trackMinAngle(90),
 			Attributes.trackMaxAngle(270),
-            Attributes.trackRounding(true),
+            Attributes.areTrackCapsRound(true),
 
 			/* Thumb */
 			Attributes.hasThumb(false),
@@ -96,7 +96,7 @@ class Tests: XCTestCase {
 		XCTAssertEqual(slider.trackShadowDepth, 4)
 		XCTAssertEqual(slider.trackMinAngle, 90)
 		XCTAssertEqual(slider.trackMaxAngle, 270)
-        XCTAssertEqual(slider.trackRounding, true)
+        XCTAssertEqual(slider.areTrackCapsRound, true)
 
 		/* Thumb */
 		XCTAssertEqual(slider.hasThumb, false)

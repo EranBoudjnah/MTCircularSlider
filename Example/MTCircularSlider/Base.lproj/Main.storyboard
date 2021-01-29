@@ -129,7 +129,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="value">
                                         <real key="value" value="0.25"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="trackRounding" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="areTrackCapsRound" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nI-1g-fCM" customClass="MTCircularSlider" customModule="MTCircularSlider">

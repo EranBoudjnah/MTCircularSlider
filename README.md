@@ -118,9 +118,9 @@ Sets the maximum angle of the track in degrees.
 
 Default value: 360
 
-###### ``trackRounding(Bool)``
+###### ``areTrackCapsRound(Bool)``
 
-Sets the roundness of the edges. 
+Sets whether the edges of the track around round (true) or flat (false).
 
 Default value: false
 
