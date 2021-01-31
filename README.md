@@ -7,7 +7,7 @@
 
 ## Screenshot
 
-![Screenshot from Simulator](https://raw.githubusercontent.com/EranBoudjnah/MTCircularSlider/screenshots/screenshots/Simulator%20Screen%20Shot%2016%20Sep%202018.gif)
+![Screenshot from Simulator](https://user-images.githubusercontent.com/24318356/106140467-7e209880-6177-11eb-932a-3541f05273e9.gif)
 
 ## Usage
 
