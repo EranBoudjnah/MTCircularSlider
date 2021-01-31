@@ -118,6 +118,12 @@ Sets the maximum angle of the track in degrees.
 
 Default value: 360
 
+###### ``areTrackCapsRound(Bool)``
+
+Sets whether the edges of the track around round (true) or flat (false).
+
+Default value: false
+
 ###### ``maxWinds(Float)``
 
 Sets the maximum number of times a user can wind the control. If set to a value
