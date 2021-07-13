@@ -54,6 +54,8 @@ class ViewController: UIViewController {
 
 	fileprivate func setValueLabelText() {
 		valueLabel.text = String(Int(knobWithLabelView.value))
+        
+        knobWithLabelView.applyAttributes([Attributes.areTrackCapsRound(true)])
 	}
 
 	fileprivate func initCustomKnobs() {
