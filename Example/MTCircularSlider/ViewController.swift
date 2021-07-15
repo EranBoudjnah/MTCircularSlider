@@ -53,7 +53,7 @@ class ViewController: UIViewController {
 	}
 
 	fileprivate func setValueLabelText() {
-		valueLabel.text = String(Int(knobWithLabelView.value))        
+		valueLabel.text = String(Int(knobWithLabelView.value))
 	}
 
 	fileprivate func initCustomKnobs() {
